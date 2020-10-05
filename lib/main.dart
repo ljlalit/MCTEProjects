@@ -3,7 +3,6 @@ import 'package:flutter/rendering.dart';
 import 'package:QRhelp/login.dart';
 
 void main() {
-  imageCache.clear();
 
   runApp(login());
 }
