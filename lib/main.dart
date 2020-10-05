@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 import 'package:QRhelp/login.dart';
 
 void main() {
@@ -100,13 +99,13 @@ class MyApp extends StatelessWidget {
                       Expanded(child: Text('')),
                       Expanded(
                           child: new TextField(
-                              decoration:
-                                  new InputDecoration(hintText: 'Number'),
-                              keyboardType: TextInputType.number,
-                              style: TextStyle(fontSize: 20),
-                              inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.digitsOnly
-                          ])),
+                        decoration: new InputDecoration(hintText: 'Number'),
+                        keyboardType: TextInputType.number,
+                        style: TextStyle(fontSize: 20),
+                        //     inputFormatters: <TextInputFormatter>[
+                        //   FilteringTextInputFormatter.digitsOnly
+                        // ]
+                      )),
                       Expanded(child: Text('')),
                       Expanded(
                           child: new TextField(
