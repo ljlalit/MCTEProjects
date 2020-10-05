@@ -1,9 +1,20 @@
+import 'package:QRhelp/RedButton.dart';
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
 class login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    RedButton b1 = RedButton(
+        text: 'Continue',
+        onPressed: () {
+          Navigator.pushNamed(context, 'home');
+        });
+    RedButton b2 = RedButton(
+        text: 'SignUp',
+        onPressed: () {
+          Navigator.pushNamed(context, 'signup');
+        });
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xffffffff),
@@ -74,6 +85,9 @@ class login extends StatelessWidget {
             ),
             textAlign: TextAlign.left,
           ),
+          SizedBox(
+            height: MediaQuery.of(context).viewInsets.bottom,
+          ),
           // InkWell(
           //     onTap: () => {login()},
           //     child: Text(
@@ -85,69 +99,20 @@ class login extends StatelessWidget {
           //       ),
           //       textAlign: TextAlign.left,
           //     )),
+          SizedBox(
+            height: 100.0,
+          ),
 
           Row(
             children: [
               SizedBox(
                 width: 5.0,
               ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: const Color(0xffe53935),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xc4000000),
-                      offset: Offset(0, 3),
-                      blurRadius: 6,
-                    ),
-                  ],
-                ),
-                child: FlatButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'home');
-                  },
-                  child: Text(
-                    'Continue',
-                    style: TextStyle(
-                      fontFamily: 'NeueKabel',
-                      fontSize: 29,
-                      color: const Color(0xffffffff),
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
+              b1.buildButton(),
               SizedBox(
-                width: 50.0,
+                width: 140.0,
               ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: const Color(0xffe53935),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xc4000000),
-                      offset: Offset(0, 3),
-                      blurRadius: 6,
-                    ),
-                  ],
-                ),
-                child: FlatButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'signup');
-                  },
-                  child: Text(
-                    'Sign Up',
-                    style: TextStyle(
-                      fontFamily: 'NeueKabel',
-                      fontSize: 29,
-                      color: const Color(0xffffffff),
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
+              b2.buildButton(),
             ],
           ),
         ],

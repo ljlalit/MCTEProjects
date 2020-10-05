@@ -89,6 +89,12 @@ class signup extends StatelessWidget {
             ),
             textAlign: TextAlign.left,
           ),
+          SizedBox(
+            height: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          SizedBox(
+            height: 100.0,
+          ),
           Row(
             children: [
               SizedBox(
@@ -96,7 +102,7 @@ class signup extends StatelessWidget {
               ),
               b1.buildButton(),
               SizedBox(
-                width: 50.0,
+                width: 140.0,
               ),
               b2.buildButton(),
             ],
