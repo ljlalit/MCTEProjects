@@ -8,7 +8,7 @@ class homenav extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffffffff),
-      body: Stack(
+      body: Column(
         children: <Widget>[
           Transform.translate(
             offset: Offset(-91.6, 575.6),
