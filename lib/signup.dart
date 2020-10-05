@@ -122,6 +122,12 @@ class _signupState extends State<signup> {
             ),
             textAlign: TextAlign.left,
           ),
+          SizedBox(
+            height: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          SizedBox(
+            height: 100.0,
+          ),
           Row(
             children: [
               SizedBox(
@@ -129,7 +135,7 @@ class _signupState extends State<signup> {
               ),
               b1.buildButton(),
               SizedBox(
-                width: 50.0,
+                width: 140.0,
               ),
               b2.buildButton(),
             ],
