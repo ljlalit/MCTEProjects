@@ -135,7 +135,7 @@ class _signupState extends State<signup> {
               ),
               b1.buildButton(),
               SizedBox(
-                width: 140.0,
+                width: 50.0,
               ),
               b2.buildButton(),
             ],

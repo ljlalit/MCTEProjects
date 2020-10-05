@@ -165,7 +165,7 @@ class _loginState extends State<login> {
                 ),
               ),
               SizedBox(
-                width: 140.0,
+                width: 50.0,
               ),
               b2.buildButton(),
             ],
