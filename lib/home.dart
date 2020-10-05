@@ -1,9 +1,41 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:QRhelp/homenav.dart';
 import 'package:QRhelp/homeqr.dart';
+
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
-class home extends StatelessWidget {
+class home extends StatefulWidget {
+  @override
+  _homeState createState() => _homeState();
+}
+
+class _homeState extends State<home> {
+  final _auth = FirebaseAuth.instance;
+  User loggedinUser;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    getCurrentUser();
+  }
+
+  void getCurrentUser() async {
+    try{
+      final user = await _auth.currentUser;
+      if(user != null){
+        loggedinUser = user;
+        print(loggedinUser.email);
+      }
+    }
+    catch(e){
+      print(e);
+    }
+  }
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

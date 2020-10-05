@@ -1,15 +1,37 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:QRhelp/RedButton.dart';
 
 // ignore: camel_case_types
 
-class signup extends StatelessWidget {
+class signup extends StatefulWidget {
+  @override
+  _signupState createState() => _signupState();
+}
+
+class _signupState extends State<signup> {
+  final _auth = FirebaseAuth.instance;
+  String email;
+
+  String password;
+
+  String cpass;
+
   @override
   Widget build(BuildContext context) {
     RedButton b1 = RedButton(
       text: 'Continue',
-      onPressed: () {
-        Navigator.pushNamed(context, 'firstsignin');
+      onPressed: () async{
+        try{
+          final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+          if(newUser != null){
+            Navigator.pushNamed(context, 'firstsignin');
+          }
+        } 
+        catch(e){
+          print(e);
+        }
       },
     );
     RedButton b2 = RedButton(
@@ -66,6 +88,10 @@ class signup extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           TextField(
+            keyboardType: TextInputType.emailAddress,
+            onChanged: (value){
+              email = value;
+            },
             decoration: InputDecoration(labelText: 'Email'),
             style: TextStyle(
               fontFamily: 'Segoe UI',
@@ -74,6 +100,10 @@ class signup extends StatelessWidget {
             textAlign: TextAlign.left,
           ),
           TextField(
+            // obscureText: true,
+            onChanged: (value){
+              password = value;
+            },
             decoration: InputDecoration(labelText: 'Password'),
             style: TextStyle(
               fontFamily: 'Segoe UI',
@@ -82,6 +112,9 @@ class signup extends StatelessWidget {
             textAlign: TextAlign.left,
           ),
           TextField(
+            onChanged: (value){
+              cpass = value;
+            },
             decoration: InputDecoration(labelText: 'Confirm Password'),
             style: TextStyle(
               fontFamily: 'Segoe UI',

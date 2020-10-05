@@ -1,7 +1,21 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+
 
 // ignore: camel_case_types
-class login extends StatelessWidget {
+class login extends StatefulWidget {
+  @override
+  _loginState createState() => _loginState();
+}
+
+class _loginState extends State<login> {
+  final _auth = FirebaseAuth.instance;
+
+  String email;
+
+  String password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,6 +72,10 @@ class login extends StatelessWidget {
               ),
               textAlign: TextAlign.center),
           TextField(
+            keyboardType: TextInputType.emailAddress,
+            onChanged: (value){
+              email = value;
+            },
             decoration: InputDecoration(labelText: 'Email'),
             style: TextStyle(
               fontFamily: 'Segoe UI',
@@ -67,6 +85,9 @@ class login extends StatelessWidget {
           ),
 
           TextField(
+            onChanged: (value){
+              password = value;
+            },
             decoration: InputDecoration(labelText: 'Password'),
             style: TextStyle(
               fontFamily: 'Segoe UI',
@@ -104,8 +125,16 @@ class login extends StatelessWidget {
                   ],
                 ),
                 child: FlatButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'home');
+                  onPressed: () async {
+                    try{
+                      final user = await _auth.signInWithEmailAndPassword(email: email, password: password);
+                      if(user != null){
+                        Navigator.pushNamed(context, 'home');
+                      }
+                    }
+                    catch(e){
+                      print(e);
+                    }
                   },
                   child: Text(
                     'Continue',
