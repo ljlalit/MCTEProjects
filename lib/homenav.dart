@@ -60,6 +60,18 @@ class homenav extends StatelessWidget {
               ),
             ),
             InkWell(
+              onTap: () => ({Navigator.pushNamed(context, 'services')}),
+              child: Text(
+                'Your Services',
+                style: TextStyle(
+                  fontFamily: 'NeueKabel',
+                  fontSize: 32,
+                  color: const Color(0xffffffff),
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            InkWell(
                 onTap: () => ({Navigator.pushNamed(context, 'login')}),
                 child: SizedBox(
                   width: 118.0,
