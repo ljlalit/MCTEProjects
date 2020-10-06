@@ -1,6 +1,8 @@
+import 'package:QRhelp/RedButton.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'constants.dart';
 
 // ignore: camel_case_types
 class firstsign extends StatefulWidget {
@@ -40,12 +42,11 @@ class _firstsignState extends State<firstsign> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: const Color(0xffe53935),
+        backgroundColor: Colors.white,
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Expanded(
-              flex: 4,
+              flex: 2,
               child: Hero(
                 tag: 'logo',
                 child: Container(
@@ -62,12 +63,13 @@ class _firstsignState extends State<firstsign> {
               ),
             ),
             Expanded(
-              flex: 2,
               child: TextField(
                 onChanged: (value) {
                   name = value;
                 },
-                decoration: InputDecoration(labelText: 'Name'),
+                decoration: kTextFieldDecoration.copyWith(
+                  labelText: 'Name',
+                ),
                 style: TextStyle(
                   fontFamily: 'Segoe UI',
                   fontSize: 24,
@@ -76,12 +78,13 @@ class _firstsignState extends State<firstsign> {
               ),
             ),
             Expanded(
-              flex: 2,
               child: TextField(
                 onChanged: (value) {
                   number = value;
                 },
-                decoration: InputDecoration(labelText: 'Number'),
+                decoration: kTextFieldDecoration.copyWith(
+                  labelText: 'Number',
+                ),
                 keyboardType: TextInputType.number,
                 style: TextStyle(
                   fontFamily: 'Segoe UI',
@@ -91,12 +94,13 @@ class _firstsignState extends State<firstsign> {
               ),
             ),
             Expanded(
-              flex: 2,
               child: TextField(
                 onChanged: (value) {
                   rank = value;
                 },
-                decoration: InputDecoration(labelText: 'Rank'),
+                decoration: kTextFieldDecoration.copyWith(
+                  labelText: 'Rank',
+                ),
                 style: TextStyle(
                   fontFamily: 'Segoe UI',
                   fontSize: 24,
@@ -105,12 +109,13 @@ class _firstsignState extends State<firstsign> {
               ),
             ),
             Expanded(
-              flex: 2,
               child: TextField(
                 onChanged: (value) {
                   unit = value;
                 },
-                decoration: InputDecoration(labelText: 'Unit'),
+                decoration: kTextFieldDecoration.copyWith(
+                  labelText: 'Unit',
+                ),
                 style: TextStyle(
                   fontFamily: 'Segoe UI',
                   fontSize: 24,
@@ -118,49 +123,33 @@ class _firstsignState extends State<firstsign> {
                 textAlign: TextAlign.left,
               ),
             ),
+            SizedBox(
+              height: MediaQuery.of(context).viewInsets.bottom,
+            ),
             Expanded(
-              flex: 1,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: const Color(0xffe53935),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xc4000000),
-                      offset: Offset(0, 3),
-                      blurRadius: 6,
-                    ),
-                  ],
-                ),
-                child: FlatButton(
-                  onPressed: () async {
-                    try {
-                      _firestore.collection('users').doc(loggedinUser.uid).set({
-                        'Name': name,
-                        'Number': number,
-                        'Rank': rank,
-                        'Unit': unit,
-                        'Email': loggedinUser.email,
-                        'Services': [],
-                        'Type': 'guser',
-                      });
-                      if (loggedinUser != null) {
-                        Navigator.pushNamed(context, 'home');
-                      }
-                    } catch (e) {
-                      print(e);
+              child: RedButton(
+                text: 'Continue',
+                width: 400,
+                height: 55,
+                c: Colors.redAccent,
+                onPressed: () async {
+                  try {
+                    _firestore.collection('users').doc(loggedinUser.uid).set({
+                      'Name': name,
+                      'Number': number,
+                      'Rank': rank,
+                      'Unit': unit,
+                      'Email': loggedinUser.email,
+                      'Services': [],
+                      'Type': 'guser',
+                    });
+                    if (loggedinUser != null) {
+                      Navigator.pushNamed(context, 'home');
                     }
-                  },
-                  child: Text(
-                    'Continue',
-                    style: TextStyle(
-                      fontFamily: 'NeueKabel',
-                      fontSize: 29,
-                      color: const Color(0xffffffff),
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+                  } catch (e) {
+                    print(e);
+                  }
+                },
               ),
             ),
           ],
