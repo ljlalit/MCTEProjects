@@ -1,9 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:QRhelp/homenav.dart';
-import 'package:QRhelp/homeqr.dart';
 
 import 'package:flutter/material.dart';
 
+// ignore: camel_case_types
 class home extends StatefulWidget {
   @override
   _homeState createState() => _homeState();
