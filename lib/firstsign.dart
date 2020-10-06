@@ -13,13 +13,17 @@ class firstsign extends StatelessWidget {
           children: <Widget>[
             Expanded(
               flex: 4,
-              child: Container(
-                width: 243.0,
-                height: 185.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: const AssetImage('assets/ADGPI_Indian_Army.svg.png'),
-                    fit: BoxFit.fill,
+              child: Hero(
+                tag: 'logo',
+                child: Container(
+                  width: 243.0,
+                  height: 185.0,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image:
+                          const AssetImage('assets/ADGPI_Indian_Army.svg.png'),
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
               ),

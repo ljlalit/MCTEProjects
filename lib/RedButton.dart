@@ -1,32 +1,31 @@
 import 'package:flutter/material.dart';
 
-class RedButton {
+class RedButton extends StatelessWidget {
   final String text;
+  final Color c;
   final onPressed;
-  RedButton({this.text, this.onPressed});
-  Container buildButton() {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        color: const Color(0xffe53935),
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0xc4000000),
-            offset: Offset(0, 3),
-            blurRadius: 6,
+  final double width;
+  final double height;
+  RedButton({this.text, this.c, this.onPressed, this.width, this.height});
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 16.0),
+      child: Material(
+        elevation: 5.0,
+        color: c,
+        borderRadius: BorderRadius.circular(30.0),
+        child: MaterialButton(
+          onPressed: onPressed,
+          minWidth: width,
+          height: height,
+          child: Text(
+            text,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20.0,
+            ),
           ),
-        ],
-      ),
-      child: FlatButton(
-        onPressed: onPressed,
-        child: Text(
-          text,
-          style: TextStyle(
-            fontFamily: 'NeueKabel',
-            fontSize: 29,
-            color: const Color(0xffffffff),
-          ),
-          textAlign: TextAlign.center,
         ),
       ),
     );
