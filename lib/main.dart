@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:QRhelp/adminhome.dart';
 import 'package:QRhelp/firstsign.dart';
 import 'package:QRhelp/home.dart';
 import 'package:QRhelp/homenav.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
       'homeqr': (context) => homeqr(),
       'profile': (context) => profile(),
       'services': (context) => userservices(),
+      'adminhome': (context) => adminhome(),
     });
   }
 }
