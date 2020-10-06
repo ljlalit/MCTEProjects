@@ -140,7 +140,9 @@ class _firstsignState extends State<firstsign> {
                         'Number': number,
                         'Rank': rank,
                         'Unit': unit,
+                        'Email': loggedinUser.email,
                         'Services': [],
+                        'Type': 'guser',
                       });
                       if (loggedinUser != null) {
                         Navigator.pushNamed(context, 'home');
