@@ -1,7 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore: camel_case_types
-class profile extends StatelessWidget {
+class profile extends StatefulWidget {
+  @override
+  _profileState createState() => _profileState();
+}
+
+class _profileState extends State<profile> {
+  final _firestore = FirebaseFirestore.instance;
+  final _auth = FirebaseAuth.instance;
+  User loggedinUser;
+
+  @override
+  void initState() {
+    super.initState();
+
+    getCurrentUser();
+  }
+
+//   var getOptions = {
+//     source: 'cache'
+// };
+  var data;
+  String name;
+  String number;
+  String rank;
+  String unit;
+  var docref;
+  void getCurrentUser() async {
+    try {
+      // ignore: await_only_futures
+      final user = await _auth.currentUser;
+      if (user != null) {
+        loggedinUser = user;
+        docref = _firestore.collection("users").doc(loggedinUser.uid);
+        docref.get().then((value) {
+          if (value.exists) {
+            data = value.data();
+            setState(() {
+              this.name = data['Name'];
+              this.number = data['Number'];
+              this.rank = data['Rank'];
+              this.unit = data['Unit'];
+            });
+          }
+        }).catchError((e) {
+          print(e);
+        });
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +87,7 @@ class profile extends StatelessWidget {
             onPressed: () {},
           ),
           Text(
-            'Name:',
+            'Name: ${name}',
             style: TextStyle(
               fontFamily: 'Segoe UI',
               fontSize: 34,
@@ -43,7 +96,7 @@ class profile extends StatelessWidget {
             textAlign: TextAlign.left,
           ),
           Text(
-            'Rank:',
+            'Rank:  ${rank}',
             style: TextStyle(
               fontFamily: 'Segoe UI',
               fontSize: 34,
@@ -52,7 +105,7 @@ class profile extends StatelessWidget {
             textAlign: TextAlign.left,
           ),
           Text(
-            'Number:',
+            'Number:  ${number}',
             style: TextStyle(
               fontFamily: 'Segoe UI',
               fontSize: 34,
@@ -61,7 +114,7 @@ class profile extends StatelessWidget {
             textAlign: TextAlign.left,
           ),
           Text(
-            'Unit:',
+            'Unit: ${unit}',
             style: TextStyle(
               fontFamily: 'Segoe UI',
               fontSize: 34,
