@@ -100,7 +100,12 @@ class _homeState extends State<home> {
             textAlign: TextAlign.left,
           ),
           InkWell(
-            onTap: () => ({Navigator.pushNamed(context, 'homeqr')}),
+            onTap: () => ({
+              Navigator.pushNamed(
+                context,
+                'homeqr',
+              ),
+            }),
             child: Transform.rotate(
               angle: -0.5411,
               child: Container(

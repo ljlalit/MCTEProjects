@@ -1,9 +1,36 @@
 import 'package:QRhelp/home.dart';
 import 'package:flutter/material.dart';
 import 'QrGenerator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 // ignore: camel_case_types
-class homeqr extends StatelessWidget {
+class homeqr extends StatefulWidget {
+  @override
+  _homeqrState createState() => _homeqrState();
+}
+
+final _auth = FirebaseAuth.instance;
+User loggedinUser;
+void getCurrentUser() async {
+  try {
+    // ignore: await_only_futures
+    final user = await _auth.currentUser;
+    if (user != null) {
+      loggedinUser = user;
+      print(loggedinUser.email);
+    }
+  } catch (e) {
+    print(e);
+  }
+}
+
+class _homeqrState extends State<homeqr> {
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +68,7 @@ class homeqr extends StatelessWidget {
             Container(
               color: Colors.white,
               child: QrGenerator(
-                userId: '5Dp9tNDaUdeA6rTHHQopLNWgS0i2',
+                userId: loggedinUser.uid,
               ),
             ),
 
