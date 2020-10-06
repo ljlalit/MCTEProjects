@@ -8,6 +8,21 @@ class homeqr extends StatelessWidget {
     return Scaffold(
         backgroundColor: const Color(0xffe53935),
         body: Column(children: <Widget>[
+          InkWell(
+            onTap: () => (home()),
+            // Adobe XD layer: '76d5dbd2-d96c-4435-…' (shape)
+            child: Container(
+              width: 86.0,
+              height: 86.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: const AssetImage(
+                      'assets/76d5dbd2-d96c-4435-92dc-68cb226fd7a5.png'),
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+          ),
           Container(
             width: 311.0,
             height: 311.0,
@@ -37,21 +52,6 @@ class homeqr extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
-          InkWell(
-            onTap: () => (home()),
-            // Adobe XD layer: '76d5dbd2-d96c-4435-…' (shape)
-            child: Container(
-              width: 86.0,
-              height: 86.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage(
-                      'assets/76d5dbd2-d96c-4435-92dc-68cb226fd7a5.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          )
         ]));
   }
 }

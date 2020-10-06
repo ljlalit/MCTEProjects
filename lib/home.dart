@@ -4,37 +4,35 @@ import 'package:QRhelp/homeqr.dart';
 
 import 'package:flutter/material.dart';
 
-// ignore: camel_case_types
 class home extends StatefulWidget {
   @override
   _homeState createState() => _homeState();
 }
 
+// ignore: camel_case_types
 class _homeState extends State<home> {
   final _auth = FirebaseAuth.instance;
   User loggedinUser;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     getCurrentUser();
   }
 
   void getCurrentUser() async {
-    try{
+    try {
+      // ignore: await_only_futures
       final user = await _auth.currentUser;
-      if(user != null){
+      if (user != null) {
         loggedinUser = user;
         print(loggedinUser.email);
       }
-    }
-    catch(e){
+    } catch (e) {
       print(e);
     }
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -44,13 +42,11 @@ class _homeState extends State<home> {
           Row(children: <Widget>[
             Container(
               alignment: Alignment.centerLeft,
-              child: RaisedButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return homenav();
-                    }));
+              child: InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, 'homenav');
                   },
+
                   // Adobe XD layer: 'baseline_account_ci…' (shape)
                   child: Container(
                     width: 68.0,
@@ -70,7 +66,7 @@ class _homeState extends State<home> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(3.0),
                 image: DecorationImage(
-                  image: const AssetImage(''),
+                  image: const AssetImage('assets/ADGPI_Indian_Army.svg.png'),
                   fit: BoxFit.fill,
                 ),
                 boxShadow: [
@@ -105,7 +101,7 @@ class _homeState extends State<home> {
             textAlign: TextAlign.left,
           ),
           InkWell(
-            onTap: () => ({homeqr()}),
+            onTap: () => ({Navigator.pushNamed(context, 'homeqr')}),
             child: Transform.rotate(
               angle: -0.5411,
               child: Container(

@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:QRhelp/RedButton.dart';
 import 'package:flutter/material.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 
 // ignore: camel_case_types
 class login extends StatefulWidget {
@@ -10,6 +9,7 @@ class login extends StatefulWidget {
   _loginState createState() => _loginState();
 }
 
+// ignore: camel_case_types
 class _loginState extends State<login> {
   final _auth = FirebaseAuth.instance;
 
@@ -19,6 +19,7 @@ class _loginState extends State<login> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     RedButton b1 = RedButton(
         text: 'Continue',
         onPressed: () {
@@ -84,7 +85,7 @@ class _loginState extends State<login> {
               textAlign: TextAlign.center),
           TextField(
             keyboardType: TextInputType.emailAddress,
-            onChanged: (value){
+            onChanged: (value) {
               email = value;
             },
             decoration: InputDecoration(labelText: 'Email'),
@@ -96,7 +97,7 @@ class _loginState extends State<login> {
           ),
 
           TextField(
-            onChanged: (value){
+            onChanged: (value) {
               password = value;
             },
             decoration: InputDecoration(labelText: 'Password'),
@@ -143,13 +144,13 @@ class _loginState extends State<login> {
                 ),
                 child: FlatButton(
                   onPressed: () async {
-                    try{
-                      final user = await _auth.signInWithEmailAndPassword(email: email, password: password);
-                      if(user != null){
+                    try {
+                      final user = await _auth.signInWithEmailAndPassword(
+                          email: email, password: password);
+                      if (user != null) {
                         Navigator.pushNamed(context, 'home');
                       }
-                    }
-                    catch(e){
+                    } catch (e) {
                       print(e);
                     }
                   },

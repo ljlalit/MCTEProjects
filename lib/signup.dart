@@ -5,11 +5,13 @@ import 'package:QRhelp/RedButton.dart';
 
 // ignore: camel_case_types
 
+// ignore: camel_case_types
 class signup extends StatefulWidget {
   @override
   _signupState createState() => _signupState();
 }
 
+// ignore: camel_case_types
 class _signupState extends State<signup> {
   final _auth = FirebaseAuth.instance;
   String email;
@@ -22,14 +24,14 @@ class _signupState extends State<signup> {
   Widget build(BuildContext context) {
     RedButton b1 = RedButton(
       text: 'Continue',
-      onPressed: () async{
-        try{
-          final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-          if(newUser != null){
+      onPressed: () async {
+        try {
+          final newUser = await _auth.createUserWithEmailAndPassword(
+              email: email, password: password);
+          if (newUser != null) {
             Navigator.pushNamed(context, 'firstsignin');
           }
-        } 
-        catch(e){
+        } catch (e) {
           print(e);
         }
       },
@@ -89,7 +91,7 @@ class _signupState extends State<signup> {
           ),
           TextField(
             keyboardType: TextInputType.emailAddress,
-            onChanged: (value){
+            onChanged: (value) {
               email = value;
             },
             decoration: InputDecoration(labelText: 'Email'),
@@ -101,7 +103,7 @@ class _signupState extends State<signup> {
           ),
           TextField(
             // obscureText: true,
-            onChanged: (value){
+            onChanged: (value) {
               password = value;
             },
             decoration: InputDecoration(labelText: 'Password'),
@@ -112,7 +114,7 @@ class _signupState extends State<signup> {
             textAlign: TextAlign.left,
           ),
           TextField(
-            onChanged: (value){
+            onChanged: (value) {
               cpass = value;
             },
             decoration: InputDecoration(labelText: 'Confirm Password'),

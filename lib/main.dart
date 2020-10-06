@@ -1,5 +1,7 @@
 import 'package:QRhelp/firstsign.dart';
 import 'package:QRhelp/home.dart';
+import 'package:QRhelp/homenav.dart';
+import 'package:QRhelp/homeqr.dart';
 import 'package:QRhelp/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:QRhelp/login.dart';
@@ -19,6 +21,8 @@ class MyApp extends StatelessWidget {
       'signup': (context) => signup(),
       'home': (context) => home(),
       'firstsignin': (context) => firstsign(),
+      'homenav': (context) => homenav(),
+      'homeqr': (context) => homeqr(),
     });
   }
 }
