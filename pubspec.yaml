@@ -44,12 +44,12 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
 
-#  fonts:
-#    - family: NeueKabel
-#      fonts:
-#        - asset: fonts/Neue Kabel W01 Regular.ttf
-#        - asset: fonts/Neue Kabel W01 Bold.ttf
-#          weight: 800
+  fonts:
+    - family: NeueKabel
+      fonts:
+        - asset: fonts/Neue Kabel W01 Regular.ttf
+        - asset: fonts/Neue Kabel W01 Bold.ttf
+          weight: 800
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -58,8 +58,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/ADGPI_Indian_Army.svg.png
-    - assets\baseline_account_circle_black_18dp.png
-    - assets\76d5dbd2-d96c-4435-92dc-68cb226fd7a5.png
+    - assets/baseline_account_circle_black_18dp.png
+    - assets/76d5dbd2-d96c-4435-92dc-68cb226fd7a5.png
+    - assets/Signals (1).png
+    - assets/clear_white_192x192.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -72,17 +74,17 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+#   fonts:
+#     - family: Schyler
+#       fonts:
+#         - asset: fonts/Schyler-Regular.ttf
+#         - asset: fonts/Schyler-Italic.ttf
+#           style: italic
+#     - family: Trajan Pro
+#       fonts:
+#         - asset: fonts/TrajanPro.ttf
+#         - asset: fonts/TrajanPro_Bold.ttf
+#           weight: 700
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
