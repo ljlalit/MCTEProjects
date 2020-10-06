@@ -87,7 +87,7 @@ class _homeState extends State<home> {
               ),
               children: [
                 TextSpan(
-                  text: 'Hello,' + loggedinUser.displayName,
+                  text: 'Hello,',
                 ),
                 TextSpan(
                   text: 'UserName',
