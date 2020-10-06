@@ -60,6 +60,7 @@ class _profileState extends State<profile> {
     return Scaffold(
       backgroundColor: const Color(0xffffffff),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           Container(
@@ -78,7 +79,7 @@ class _profileState extends State<profile> {
             child: Text(
               'Change Photo',
               style: TextStyle(
-                fontFamily: 'NeueKabelW01-Regular',
+                fontFamily: 'NeueKabel',
                 fontSize: 24,
                 color: const Color(0xffffffff),
               ),

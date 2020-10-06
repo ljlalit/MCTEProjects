@@ -9,7 +9,7 @@ class QrGenerator extends StatelessWidget {
     return QrImage(
       data: userId,
       version: QrVersions.auto,
-      size: 311.0,
+      size: 250.0,
     );
   }
 }

@@ -26,7 +26,7 @@ class _homeqrState extends State<homeqr> {
       if (user != null) {
         loggedinUser = user;
         setState(() {
-          this.myuid = loggedinUser.uid
+          this.myuid = loggedinUser.uid;
         });
         // myuid = loggedinUser.uid;
         print(loggedinUser.email);
@@ -41,22 +41,25 @@ class _homeqrState extends State<homeqr> {
     return Scaffold(
         backgroundColor: const Color(0xffe53935),
         body: Center(
-          child: Column(children: <Widget>[
-            InkWell(
-              onTap: () => (Navigator.pushNamed(context, 'home')),
-              // Adobe XD layer: '76d5dbd2-d96c-4435-…' (shape)
-              child: Container(
-                width: 86.0,
-                height: 86.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: const AssetImage(
-                        'assets/76d5dbd2-d96c-4435-92dc-68cb226fd7a5.png'),
-                    fit: BoxFit.fill,
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                SizedBox(),
+                InkWell(
+                  onTap: () => (Navigator.pushNamed(context, 'home')),
+                  // Adobe XD layer: '76d5dbd2-d96c-4435-…' (shape)
+                  child: Container(
+                    width: 86.0,
+                    height: 86.0,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: const AssetImage(
+                            'assets/76d5dbd2-d96c-4435-92dc-68cb226fd7a5.png'),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
 //            Container(
 //              width: 311.0,
 //              height: 311.0,
@@ -70,26 +73,30 @@ class _homeqrState extends State<homeqr> {
 //                    color: const Color(0xcc000000),
 //                    offset: Offset(8, 7),
 //                    blurRadius: 3,
-            Container(
-              color: Colors.white,
-              child: QrGenerator(
-                userId: myuid,
-              ),
-            ),
-
-            SizedBox(
-              width: 206.0,
-              child: Text(
-                'Your QR',
-                style: TextStyle(
-                  fontFamily: 'NeueKabelW01-Bold',
-                  fontSize: 48,
-                  color: const Color(0xffffffff),
+                SizedBox(
+                  width: 206.0,
+                  child: Text(
+                    'Your QR',
+                    style: TextStyle(
+                      fontFamily: 'NeueKabel',
+                      fontSize: 48,
+                      color: const Color(0xffffffff),
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ]),
+
+                SizedBox(),
+                Container(
+                  color: Colors.white,
+                  child: QrGenerator(
+                    userId: myuid,
+                  ),
+                ),
+
+                SizedBox(), SizedBox(), SizedBox(), SizedBox(), SizedBox(),
+                SizedBox(), SizedBox(), SizedBox(), SizedBox(), SizedBox(),
+              ]),
         ));
   }
 }
