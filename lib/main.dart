@@ -1,11 +1,15 @@
+import 'dart:developer';
+
 import 'package:QRhelp/firstsign.dart';
 import 'package:QRhelp/home.dart';
 import 'package:QRhelp/homenav.dart';
 import 'package:QRhelp/homeqr.dart';
+import 'package:QRhelp/profile.dart';
 import 'package:QRhelp/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:QRhelp/login.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:QRhelp/userservices.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +27,8 @@ class MyApp extends StatelessWidget {
       'firstsignin': (context) => firstsign(),
       'homenav': (context) => homenav(),
       'homeqr': (context) => homeqr(),
+      'profile': (context) => profile(),
+      'services': (context) => userservices(),
     });
   }
 }

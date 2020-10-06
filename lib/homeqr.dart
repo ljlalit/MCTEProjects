@@ -9,7 +9,7 @@ class homeqr extends StatelessWidget {
         backgroundColor: const Color(0xffe53935),
         body: Column(children: <Widget>[
           InkWell(
-            onTap: () => (home()),
+            onTap: () => (Navigator.pushNamed(context, 'home')),
             // Adobe XD layer: '76d5dbd2-d96c-4435-…' (shape)
             child: Container(
               width: 86.0,
