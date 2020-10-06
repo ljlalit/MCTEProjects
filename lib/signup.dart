@@ -15,9 +15,7 @@ class signup extends StatefulWidget {
 class _signupState extends State<signup> {
   final _auth = FirebaseAuth.instance;
   String email;
-
   String password;
-
   String cpass;
 
   @override
@@ -28,9 +26,7 @@ class _signupState extends State<signup> {
         try {
           final newUser = await _auth.createUserWithEmailAndPassword(
               email: email, password: password);
-          if (newUser != null) {
-            Navigator.pushNamed(context, 'firstsignin');
-          }
+          Navigator.pushNamed(context, 'firstsignin');
         } catch (e) {
           print(e);
         }
