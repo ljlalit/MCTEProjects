@@ -9,26 +9,31 @@ class homeqr extends StatefulWidget {
   _homeqrState createState() => _homeqrState();
 }
 
-final _auth = FirebaseAuth.instance;
-User loggedinUser;
-void getCurrentUser() async {
-  try {
-    // ignore: await_only_futures
-    final user = await _auth.currentUser;
-    if (user != null) {
-      loggedinUser = user;
-      print(loggedinUser.email);
-    }
-  } catch (e) {
-    print(e);
-  }
-}
-
 class _homeqrState extends State<homeqr> {
   @override
   void initState() {
     super.initState();
     getCurrentUser();
+  }
+
+  final _auth = FirebaseAuth.instance;
+  User loggedinUser;
+  String myuid;
+  void getCurrentUser() async {
+    try {
+      // ignore: await_only_futures
+      final user = await _auth.currentUser;
+      if (user != null) {
+        loggedinUser = user;
+        setState(() {
+          this.myuid = loggedinUser.uid
+        });
+        // myuid = loggedinUser.uid;
+        print(loggedinUser.email);
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -68,7 +73,7 @@ class _homeqrState extends State<homeqr> {
             Container(
               color: Colors.white,
               child: QrGenerator(
-                userId: loggedinUser.uid,
+                userId: myuid,
               ),
             ),
 
