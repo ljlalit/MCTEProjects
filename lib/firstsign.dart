@@ -1,7 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore: camel_case_types
-class firstsign extends StatelessWidget {
+class firstsign extends StatefulWidget {
+  @override
+  _firstsignState createState() => _firstsignState();
+}
+
+class _firstsignState extends State<firstsign> {
+  final _firestore = FirebaseFirestore.instance;
+  final _auth = FirebaseAuth.instance;
+  User loggedinUser;
+  String name;
+  String number;
+  String rank;
+  String unit;
+  @override
+  void initState() {
+    super.initState();
+
+    getCurrentUser();
+  }
+
+  void getCurrentUser() async {
+    try {
+      // ignore: await_only_futures
+      final user = await _auth.currentUser;
+      if (user != null) {
+        loggedinUser = user;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -13,13 +46,17 @@ class firstsign extends StatelessWidget {
           children: <Widget>[
             Expanded(
               flex: 4,
-              child: Container(
-                width: 243.0,
-                height: 185.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: const AssetImage('assets/ADGPI_Indian_Army.svg.png'),
-                    fit: BoxFit.fill,
+              child: Hero(
+                tag: 'logo',
+                child: Container(
+                  width: 243.0,
+                  height: 185.0,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image:
+                          const AssetImage('assets/ADGPI_Indian_Army.svg.png'),
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
               ),
@@ -27,6 +64,9 @@ class firstsign extends StatelessWidget {
             Expanded(
               flex: 2,
               child: TextField(
+                onChanged: (value) {
+                  name = value;
+                },
                 decoration: InputDecoration(labelText: 'Name'),
                 style: TextStyle(
                   fontFamily: 'Segoe UI',
@@ -38,6 +78,9 @@ class firstsign extends StatelessWidget {
             Expanded(
               flex: 2,
               child: TextField(
+                onChanged: (value) {
+                  number = value;
+                },
                 decoration: InputDecoration(labelText: 'Number'),
                 keyboardType: TextInputType.number,
                 style: TextStyle(
@@ -50,6 +93,9 @@ class firstsign extends StatelessWidget {
             Expanded(
               flex: 2,
               child: TextField(
+                onChanged: (value) {
+                  rank = value;
+                },
                 decoration: InputDecoration(labelText: 'Rank'),
                 style: TextStyle(
                   fontFamily: 'Segoe UI',
@@ -61,6 +107,9 @@ class firstsign extends StatelessWidget {
             Expanded(
               flex: 2,
               child: TextField(
+                onChanged: (value) {
+                  unit = value;
+                },
                 decoration: InputDecoration(labelText: 'Unit'),
                 style: TextStyle(
                   fontFamily: 'Segoe UI',
@@ -84,7 +133,22 @@ class firstsign extends StatelessWidget {
                   ],
                 ),
                 child: FlatButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    try {
+                      _firestore.collection('users').doc(loggedinUser.uid).set({
+                        'Name': name,
+                        'Number': number,
+                        'Rank': rank,
+                        'Unit': unit,
+                        'Services': [],
+                      });
+                      if (loggedinUser != null) {
+                        Navigator.pushNamed(context, 'home');
+                      }
+                    } catch (e) {
+                      print(e);
+                    }
+                  },
                   child: Text(
                     'Continue',
                     style: TextStyle(

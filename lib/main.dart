@@ -8,6 +8,7 @@ import 'package:QRhelp/profile.dart';
 import 'package:QRhelp/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:QRhelp/login.dart';
+import 'package:QRhelp/profile.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:QRhelp/userservices.dart';
 

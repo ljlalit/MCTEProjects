@@ -19,16 +19,12 @@ class _loginState extends State<login> {
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    RedButton b1 = RedButton(
-        text: 'Continue',
-        onPressed: () {
-          Navigator.pushNamed(context, 'home');
-        });
-    RedButton b2 = RedButton(
-        text: 'SignUp',
-        onPressed: () {
-          Navigator.pushNamed(context, 'signup');
-        });
+//    RedButton(
+//        text: 'Continue',
+//        onPressed: () {
+//          Navigator.pushNamed(context, 'home');
+//        });
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xffffffff),
@@ -124,51 +120,37 @@ class _loginState extends State<login> {
             height: 100.0,
           ),
 
-          Row(
-            children: [
-              SizedBox(
-                width: 5.0,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: const Color(0xffe53935),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xc4000000),
-                      offset: Offset(0, 3),
-                      blurRadius: 6,
-                    ),
-                  ],
-                ),
-                child: FlatButton(
-                  onPressed: () async {
-                    try {
-                      final user = await _auth.signInWithEmailAndPassword(
-                          email: email, password: password);
-                      if (user != null) {
-                        Navigator.pushNamed(context, 'home');
-                      }
-                    } catch (e) {
-                      print(e);
-                    }
-                  },
-                  child: Text(
-                    'Continue',
-                    style: TextStyle(
-                      fontFamily: 'NeueKabel',
-                      fontSize: 29,
-                      color: const Color(0xffffffff),
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 50.0,
-              ),
-              b2.buildButton(),
-            ],
+          SizedBox(
+            width: 5.0,
+          ),
+          RedButton(
+            text: 'Continue',
+            c: Colors.redAccent,
+            onPressed: () async {
+              try {
+                final user = await _auth.signInWithEmailAndPassword(
+                    email: email, password: password);
+                if (user != null) {
+                  Navigator.pushNamed(context, 'home');
+                }
+              } catch (e) {
+                print(e);
+              }
+            },
+            width: 400.0,
+            height: 55.0,
+          ),
+          SizedBox(
+            width: 50.0,
+          ),
+          RedButton(
+            text: 'SignUp',
+            c: Colors.blueAccent,
+            onPressed: () {
+              Navigator.pushNamed(context, 'signup');
+            },
+            width: 200.0,
+            height: 20.0,
           ),
         ],
       ),
