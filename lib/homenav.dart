@@ -48,7 +48,7 @@ class homenav extends StatelessWidget {
               ),
             ),
             InkWell(
-              onTap: () => ({profile()}),
+              onTap: () => ({Navigator.pushNamed(context, 'profile')}),
               child: Text(
                 'Your Profile',
                 style: TextStyle(

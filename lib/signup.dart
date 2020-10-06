@@ -15,9 +15,7 @@ class signup extends StatefulWidget {
 class _signupState extends State<signup> {
   final _auth = FirebaseAuth.instance;
   String email;
-
   String password;
-
   String cpass;
 
   @override
