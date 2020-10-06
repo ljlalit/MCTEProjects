@@ -70,6 +70,9 @@ class _signupState extends State<signup> {
             ),
             textAlign: TextAlign.center,
           ),
+          SizedBox(
+            height: 2.0,
+          ),
           TextField(
             keyboardType: TextInputType.emailAddress,
             textAlign: TextAlign.left,

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:QRhelp/RedButton.dart';
 import 'package:flutter/material.dart';
+import 'package:QRhelp/constants.dart';
 
 // ignore: camel_case_types
 class login extends StatefulWidget {
@@ -71,31 +72,43 @@ class _loginState extends State<login> {
             ),
             textAlign: TextAlign.left,
           ),
-          Text('Military College of Telecommunication\nEngineering',
-              style: TextStyle(
-                fontFamily: 'NeueKabel',
-                fontSize: 24,
-                color: const Color(0xff000000),
-              ),
-              textAlign: TextAlign.center),
+          Text(
+            'Military College of Telecommunication\nEngineering',
+            style: TextStyle(
+              fontFamily: 'NeueKabel',
+              fontSize: 24,
+              color: const Color(0xff000000),
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(
+            height: 2.0,
+          ),
           TextField(
             keyboardType: TextInputType.emailAddress,
             onChanged: (value) {
               email = value;
             },
-            decoration: InputDecoration(labelText: 'Email'),
+            decoration: kTextFieldDecoration.copyWith(
+              labelText: 'Email',
+            ),
             style: TextStyle(
               fontFamily: 'Segoe UI',
               fontSize: 24,
             ),
             textAlign: TextAlign.left,
           ),
-
+          SizedBox(
+            height: 5.0,
+          ),
           TextField(
+            obscureText: true,
             onChanged: (value) {
               password = value;
             },
-            decoration: InputDecoration(labelText: 'Password'),
+            decoration: kTextFieldDecoration.copyWith(
+              labelText: 'Password',
+            ),
             style: TextStyle(
               fontFamily: 'Segoe UI',
               fontSize: 24,
@@ -105,21 +118,9 @@ class _loginState extends State<login> {
           SizedBox(
             height: MediaQuery.of(context).viewInsets.bottom,
           ),
-          // InkWell(
-          //     onTap: () => {login()},
-          //     child: Text(
-          //       'Forgot Password?',
-          //       style: TextStyle(
-          //         fontFamily: 'Segoe UI',
-          //         fontSize: 21,
-          //         color: const Color(0xa1090909),
-          //       ),
-          //       textAlign: TextAlign.left,
-          //     )),
           SizedBox(
             height: 100.0,
           ),
-
           SizedBox(
             width: 5.0,
           ),

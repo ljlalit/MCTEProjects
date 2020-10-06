@@ -19,7 +19,6 @@ class _firstsignState extends State<firstsign> {
   @override
   void initState() {
     super.initState();
-
     getCurrentUser();
   }
 
@@ -29,6 +28,7 @@ class _firstsignState extends State<firstsign> {
       final user = await _auth.currentUser;
       if (user != null) {
         loggedinUser = user;
+        print(loggedinUser.uid);
       }
     } catch (e) {
       print(e);
