@@ -1,5 +1,6 @@
 import 'package:QRhelp/adminhome.dart';
 import 'package:QRhelp/firstadmin.dart';
+import 'package:QRhelp/firstsign.dart';
 import 'package:QRhelp/home.dart';
 import 'package:QRhelp/homenav.dart';
 import 'package:QRhelp/homeqr.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
       'login': (context) => login(),
       'signup': (context) => signup(),
       'home': (context) => home(),
-      'firstadminin': (context) => firstadmin(),
+      'firstsign': (context) => firstsign(),
       'homenav': (context) => homenav(),
       'homeqr': (context) => homeqr(),
       'profile': (context) => profile(),

@@ -135,7 +135,7 @@ class _signupState extends State<signup> {
                 final newUser = await _auth.createUserWithEmailAndPassword(
                     email: email, password: password);
                 if (newUser != null) {
-                  Navigator.pushNamed(context, 'firstadminin');
+                  Navigator.pushNamed(context, 'firstsign');
                 }
               } catch (e) {
                 print(e);
