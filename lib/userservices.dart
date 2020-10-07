@@ -9,15 +9,19 @@ class userservices extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          Text(
-            'Your Services',
-            style: TextStyle(
-              fontFamily: 'Segoe UI',
-              fontSize: 40,
-              color: const Color(0xff090909),
-            ),
-            textAlign: TextAlign.left,
-          ),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Text(
+                  'Your Services',
+                  style: TextStyle(
+                    fontFamily: 'Segoe UI',
+                    fontSize: 40,
+                    color: const Color(0xff090909),
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+              ]),
 
           //services daaliyo font size 34 tho
         ],

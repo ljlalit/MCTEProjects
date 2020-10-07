@@ -135,7 +135,24 @@ class _signupState extends State<signup> {
                 final newUser = await _auth.createUserWithEmailAndPassword(
                     email: email, password: password);
                 if (newUser != null) {
-                  Navigator.pushNamed(context, 'firstsignin');
+                  Navigator.pushNamed(context, 'firstadminin');
+                }
+              } catch (e) {
+                print(e);
+              }
+            },
+            width: 400.0,
+            height: 55.0,
+          ),
+          RedButton(
+            text: 'Continue as Admin',
+            c: Colors.redAccent,
+            onPressed: () async {
+              try {
+                final newUser = await _auth.createUserWithEmailAndPassword(
+                    email: email, password: password);
+                if (newUser != null) {
+                  Navigator.pushNamed(context, 'firstadmin');
                 }
               } catch (e) {
                 print(e);

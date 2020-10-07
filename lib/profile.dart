@@ -60,19 +60,23 @@ class _profileState extends State<profile> {
     return Scaffold(
       backgroundColor: const Color(0xffffffff),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          Container(
-            width: 198.0,
-            height: 198.0,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: const AssetImage(
-                    'assets/baseline_account_circle_black_18dp.png'),
-                fit: BoxFit.fill,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Container(
+                width: 198.0,
+                height: 198.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: const AssetImage(
+                        'assets/baseline_account_circle_black_18dp.png'),
+                    fit: BoxFit.fill,
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
           FlatButton(
             color: const Color(0xffe53935),
