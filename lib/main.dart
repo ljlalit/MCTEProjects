@@ -1,11 +1,10 @@
-import 'dart:developer';
-
 import 'package:QRhelp/adminhome.dart';
 import 'package:QRhelp/firstsign.dart';
 import 'package:QRhelp/home.dart';
 import 'package:QRhelp/homenav.dart';
 import 'package:QRhelp/homeqr.dart';
 import 'package:QRhelp/profile.dart';
+import 'package:QRhelp/qrscanner.dart';
 import 'package:QRhelp/scannedreg.dart';
 import 'package:QRhelp/scannedunreg.dart';
 import 'package:QRhelp/signup.dart';
@@ -35,6 +34,7 @@ class MyApp extends StatelessWidget {
       'adminhome': (context) => adminhome(),
       'scanreg': (context) => scannedreg(),
       'scanunreg': (context) => scannedunreg(),
+      'qrscanner': (context) => QRViewExample(),
     });
   }
 }

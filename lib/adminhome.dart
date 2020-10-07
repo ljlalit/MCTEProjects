@@ -57,7 +57,7 @@ class adminhome extends StatelessWidget {
           ),
           FlatButton(
             onPressed: () {
-              Navigator.pushNamed(context, 'scanreg');
+              Navigator.pushNamed(context, 'qrscanner');
             },
             color: const Color(0xffe53935),
             child: Text(

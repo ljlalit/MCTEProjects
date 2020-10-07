@@ -85,17 +85,15 @@ class _homeqrState extends State<homeqr> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-
-                SizedBox(),
                 Container(
                   color: Colors.white,
                   child: QrGenerator(
                     userId: myuid,
                   ),
                 ),
-
-                SizedBox(), SizedBox(), SizedBox(), SizedBox(), SizedBox(),
-                SizedBox(), SizedBox(), SizedBox(), SizedBox(), SizedBox(),
+                SizedBox(
+                  height: 20.0,
+                ),
               ]),
         ));
   }
