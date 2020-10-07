@@ -16,7 +16,6 @@ class _profileState extends State<profile> {
   @override
   void initState() {
     super.initState();
-
     getCurrentUser();
   }
 
@@ -24,10 +23,10 @@ class _profileState extends State<profile> {
 //     source: 'cache'
 // };
   var data;
-  String name;
-  String number;
-  String rank;
-  String unit;
+  String name = 'loading';
+  String number = 'loading';
+  String rank = 'loading';
+  String unit = 'loading';
   var docref;
   void getCurrentUser() async {
     try {

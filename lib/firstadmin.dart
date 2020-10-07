@@ -75,21 +75,21 @@ class _firstadminState extends State<firstadmin> {
                 textAlign: TextAlign.left,
               ),
             ),
-            Expanded(
-              child: TextField(
-                onChanged: (value) {
-                  servicekey = value;
-                },
-                decoration: kTextFieldDecoration.copyWith(
-                  labelText: 'Service',
-                ),
-                style: TextStyle(
-                  fontFamily: 'Segoe UI',
-                  fontSize: 24,
-                ),
-                textAlign: TextAlign.left,
-              ),
-            ),
+            // Expanded(
+            //   child: TextField(
+            //     onChanged: (value) {
+            //       servicekey = value;
+            //     },
+            //     decoration: kTextFieldDecoration.copyWith(
+            //       labelText: 'Service',
+            //     ),
+            //     style: TextStyle(
+            //       fontFamily: 'Segoe UI',
+            //       fontSize: 24,
+            //     ),
+            //     textAlign: TextAlign.left,
+            //   ),
+            // ),
             SizedBox(
               height: MediaQuery.of(context).viewInsets.bottom,
             ),
@@ -106,7 +106,7 @@ class _firstadminState extends State<firstadmin> {
 
                       'Email': loggedinUser.email,
                       'Services': [],
-                      'Type': 'guser',
+                      'Type': 'admin',
                     });
                     if (loggedinUser != null) {
                       Navigator.pushNamed(context, 'adminhome');

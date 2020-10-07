@@ -22,7 +22,7 @@ class _homeState extends State<home> {
     getCurrentUser();
   }
 
-  String name;
+  String name = 'loading';
   var docref;
   var data;
 

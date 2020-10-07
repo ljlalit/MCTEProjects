@@ -22,7 +22,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(initialRoute: 'profile', routes: {
+    return MaterialApp(initialRoute: 'login', routes: {
       'login': (context) => login(),
       'signup': (context) => signup(),
       'home': (context) => home(),
