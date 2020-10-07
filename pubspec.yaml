@@ -51,6 +51,9 @@ flutter:
         - asset: fonts/Neue Kabel W01 Regular.ttf
         - asset: fonts/Neue Kabel W01 Bold.ttf
           weight: 800
+    - family: Segoe UI
+      fonts:
+        - asset: fonts\Segoe UI.ttf
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

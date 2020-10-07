@@ -8,11 +8,26 @@ class adminhome extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xffffffff),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
+          Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
+            Container(
+              alignment: Alignment.centerRight,
+              width: 60.0,
+              height: 45.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(3.0),
+                image: DecorationImage(
+                  image: const AssetImage('assets/ADGPI_Indian_Army.svg.png'),
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+          ]),
           Text.rich(
             TextSpan(
               style: TextStyle(
-                fontFamily: 'NeueKabelW01-Regular',
+                fontFamily: 'NeueKabel',
                 fontSize: 48,
                 color: const Color(0xff000000),
               ),
@@ -23,12 +38,22 @@ class adminhome extends StatelessWidget {
                 TextSpan(
                   text: 'Admin',
                   style: TextStyle(
-                    fontFamily: 'NeueKabelW01-Bold',
+                    fontFamily: 'NeueKabel',
                   ),
                 ),
               ],
             ),
             textAlign: TextAlign.left,
+          ),
+          Container(
+            width: 340.0,
+            height: 300.0,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: const AssetImage('assets/Signals (1).png'),
+                fit: BoxFit.fill,
+              ),
+            ),
           ),
           FlatButton(
             onPressed: () {
@@ -43,34 +68,6 @@ class adminhome extends StatelessWidget {
                 color: const Color(0xffffffff),
               ),
               textAlign: TextAlign.center,
-            ),
-          ),
-          Container(
-            width: 47.0,
-            height: 36.0,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(3.0),
-              image: DecorationImage(
-                image: const AssetImage(''),
-                fit: BoxFit.fill,
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0x91000000),
-                  offset: Offset(3, 3),
-                  blurRadius: 6,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            width: 357.0,
-            height: 357.0,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: const AssetImage(''),
-                fit: BoxFit.fill,
-              ),
             ),
           ),
         ],
