@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
@@ -11,6 +11,8 @@ class home extends StatefulWidget {
 // ignore: camel_case_types
 class _homeState extends State<home> {
   final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
+
   User loggedinUser;
 
   @override
@@ -20,13 +22,27 @@ class _homeState extends State<home> {
     getCurrentUser();
   }
 
+  String name;
+  var docref;
+  var data;
+
   void getCurrentUser() async {
     try {
       // ignore: await_only_futures
       final user = await _auth.currentUser;
       if (user != null) {
         loggedinUser = user;
-        print(loggedinUser.email);
+        docref = _firestore.collection("users").doc(loggedinUser.uid);
+        docref.get().then((value) {
+          if (value.exists) {
+            data = value.data();
+            setState(() {
+              this.name = data['Name'];
+            });
+          }
+        }).catchError((e) {
+          print(e);
+        });
       }
     } catch (e) {
       print(e);
@@ -97,7 +113,7 @@ class _homeState extends State<home> {
                           text: 'Hello, ',
                         ),
                         TextSpan(
-                          text: 'UserName',
+                          text: '${name}',
                           style: TextStyle(
                             fontFamily: 'NeueKabel',
                           ),
