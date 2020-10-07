@@ -70,8 +70,7 @@ class _profileState extends State<profile> {
                 height: 198.0,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: const AssetImage(
-                        'assets/baseline_account_circle_black_18dp.png'),
+                    image: const AssetImage('assets/ADGPI_Indian_Army.svg.png'),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -126,6 +125,21 @@ class _profileState extends State<profile> {
               color: const Color(0xff090909),
             ),
             textAlign: TextAlign.left,
+          ),
+          FlatButton(
+            color: const Color(0xffe53935),
+            child: Text(
+              'Back',
+              style: TextStyle(
+                fontFamily: 'NeueKabel',
+                fontSize: 24,
+                color: const Color(0xffffffff),
+              ),
+              textAlign: TextAlign.center,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
         ],
       ),
