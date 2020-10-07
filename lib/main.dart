@@ -1,5 +1,6 @@
 import 'package:QRhelp/adminhome.dart';
 import 'package:QRhelp/firstadmin.dart';
+import 'package:QRhelp/firstsign.dart';
 import 'package:QRhelp/home.dart';
 import 'package:QRhelp/homenav.dart';
 import 'package:QRhelp/homeqr.dart';
@@ -22,11 +23,11 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(initialRoute: 'profile', routes: {
+    return MaterialApp(initialRoute: 'login', routes: {
       'login': (context) => login(),
       'signup': (context) => signup(),
       'home': (context) => home(),
-      'firstadminin': (context) => firstadmin(),
+      'firstsign': (context) => firstsign(),
       'homenav': (context) => homenav(),
       'homeqr': (context) => homeqr(),
       'profile': (context) => profile(),
