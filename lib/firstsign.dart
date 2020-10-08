@@ -145,10 +145,12 @@ class _firstsignState extends State<firstsign> {
                     });
                     if (loggedinUser != null) {
                       if(!loggedinUser.emailVerified){
-                        _auth.signOut();
+                        print(loggedinUser.emailVerified);
+                        await _auth.signOut();
                         Navigator.pushNamed(context, 'login');
+                      }else{
+                        Navigator.pushNamed(context, 'home');
                       }
-                      Navigator.pushNamed(context, 'home');
                     }
                   } catch (e) {
                     print(e);

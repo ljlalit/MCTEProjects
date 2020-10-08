@@ -8,8 +8,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 class homenav extends StatelessWidget {
   final _auth = FirebaseAuth.instance;
 
-  void logout(var context){
-    _auth.signOut();
+  void logout(var context) async {
+    await _auth.signOut();
     Navigator.pushNamed(context, 'login');
   }
 
