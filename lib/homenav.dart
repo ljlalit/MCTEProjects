@@ -1,9 +1,18 @@
 import 'package:QRhelp/login.dart';
 import 'package:QRhelp/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 // ignore: camel_case_types
 class homenav extends StatelessWidget {
+  final _auth = FirebaseAuth.instance;
+
+  void logout(var context){
+    _auth.signOut();
+    Navigator.pushNamed(context, 'login');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +57,7 @@ class homenav extends StatelessWidget {
               ),
             ),
             InkWell(
-              onTap: () => ({Navigator.pushNamed(context, 'profile')}),
+              onTap: () => {Navigator.pushNamed(context, 'profile')},
               child: Text(
                 'Your Profile',
                 style: TextStyle(
@@ -72,7 +81,7 @@ class homenav extends StatelessWidget {
               ),
             ),
             InkWell(
-                onTap: () => ({Navigator.pushNamed(context, 'login')}),
+                onTap: () => ({logout(context)}),
                 child: SizedBox(
                   width: 118.0,
                   child: Text(

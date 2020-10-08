@@ -144,6 +144,10 @@ class _firstsignState extends State<firstsign> {
                       'Type': 'guser',
                     });
                     if (loggedinUser != null) {
+                      if(!loggedinUser.emailVerified){
+                        _auth.signOut();
+                        Navigator.pushNamed(context, 'login');
+                      }
                       Navigator.pushNamed(context, 'home');
                     }
                   } catch (e) {

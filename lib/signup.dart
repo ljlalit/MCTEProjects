@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:QRhelp/RedButton.dart';
 import 'constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 // ignore: camel_case_types
 
@@ -131,14 +133,24 @@ class _signupState extends State<signup> {
             text: 'Continue',
             c: Colors.redAccent,
             onPressed: () async {
-              try {
-                final newUser = await _auth.createUserWithEmailAndPassword(
-                    email: email, password: password);
-                if (newUser != null) {
-                  Navigator.pushNamed(context, 'firstsign');
-                }
-              } catch (e) {
-                print(e);
+              if(password != cpass){
+                print("Password fields dont match!");
+              }else{
+                  try {
+                    final newUser = await _auth.createUserWithEmailAndPassword(
+                        email: email.trim(), password: password);
+                    try {
+                      await newUser.user.sendEmailVerification();
+                    } catch (e) {
+                      print("An error occured while trying to send email verification");
+                      print(e.message);
+                    }
+                    if (newUser != null) {
+                      Navigator.pushNamed(context, 'firstsign');
+                    }
+                  } catch (e) {
+                    print(e);
+                  }
               }
             },
             width: 400.0,
@@ -151,6 +163,12 @@ class _signupState extends State<signup> {
               try {
                 final newUser = await _auth.createUserWithEmailAndPassword(
                     email: email, password: password);
+                try {
+                  await newUser.user.sendEmailVerification();
+                } catch (e) {
+                  print("An error occured while trying to send email verification");
+                  print(e.message);
+                }
                 if (newUser != null) {
                   Navigator.pushNamed(context, 'firstadmin');
                 }

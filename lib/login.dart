@@ -130,13 +130,18 @@ class _loginState extends State<login> {
             onPressed: () async {
               try {
                 final user = await _auth.signInWithEmailAndPassword(
-                    email: email, password: password);
+                email: email.trim(), password: password);
                 if (user != null) {
-                  Navigator.pushNamed(context, 'home');
+                  if(user.user.emailVerified){
+                    Navigator.pushNamed(context, 'home');
+                  }else{
+                    _auth.signOut();
+                    Navigator.pushNamed(context, 'login');
+                  }
                 }
               } catch (e) {
                 print(e);
-              }
+              }  
             },
             width: 400.0,
             height: 55.0,
