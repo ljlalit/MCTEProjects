@@ -1,4 +1,9 @@
+import 'package:QRhelp/RedButton.dart';
+import 'package:QRhelp/scannedunreg.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'constants.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 const flashOn = 'FLASH ON';
@@ -16,11 +21,52 @@ class QRViewExample extends StatefulWidget {
 }
 
 class _QRViewExampleState extends State<QRViewExample> {
+  final _firestore = FirebaseFirestore.instance;
+  final _auth = FirebaseAuth.instance;
+  bool found;
+  var admindocref;
+  var admindata;
+  var servicesdocref;
+  var servicesdata;
+  User loggedinUser;
+  var targetUserDoc;
+  var targetuserdata;
+  var targetuserservices;
+  var services;
   var qrText = '';
   var flashState = flashOn;
   var cameraState = frontCamera;
   QRViewController controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+    found = false;
+  }
+
+  void getCurrentUser() async {
+    try {
+      // ignore: await_only_futures
+      final user = await _auth.currentUser;
+      if (user != null) {
+        loggedinUser = user;
+        admindocref = _firestore.collection("users").doc(loggedinUser.uid);
+        admindocref.get().then((value) {
+          if (value.exists) {
+            admindata = value.data();
+            setState(() {
+              this.services = admindata['Services'];
+            });
+          }
+        }).catchError((e) {
+          print(e);
+        });
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -142,9 +188,39 @@ class _QRViewExampleState extends State<QRViewExample> {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
       setState(() {
-        qrText = scanData;
+        this.qrText = scanData;
+        checktargetuser();
       });
     });
+  }
+
+  void checktargetuser() {
+    targetUserDoc = _firestore.collection("users").doc(qrText.toString());
+    targetUserDoc.get().then((value) {
+      if (value.exists) {
+        targetuserdata = value.data();
+        targetuserservices = targetuserdata['Serviecs'];
+        for (int i = 0; i < targetuserservices.length; i++) {
+          if (services[0].toString() == targetuserservices[i].toString()) {
+            found = true;
+          }
+        }
+      }
+    }).catchError((e) {
+      print(e);
+    });
+    if (found) {
+      Navigator.pushNamed(context, 'scannedreg');
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => scannedunreg(
+                  targetuserdata: targetuserdata,
+                  servicedata: servicesdata,
+                )),
+      );
+    }
   }
 
   @override

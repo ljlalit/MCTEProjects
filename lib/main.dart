@@ -34,7 +34,6 @@ class MyApp extends StatelessWidget {
       'services': (context) => userservices(),
       'adminhome': (context) => adminhome(),
       'scanreg': (context) => scannedreg(),
-      'scanunreg': (context) => scannedunreg(),
       'qrscanner': (context) => QRViewExample(),
       'firstadmin': (context) => firstadmin(),
     });

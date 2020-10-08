@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
 class scannedunreg extends StatelessWidget {
+  final targetuserdata;
+  final servicedata;
+  scannedunreg({this.targetuserdata, this.servicedata});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
