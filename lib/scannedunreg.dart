@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'dart:collection';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:QRhelp/RedButton.dart';
@@ -164,12 +164,15 @@ class _scannedunregState extends State<scannedunreg> {
                     width: 150.0,
                     onPressed: () async {
                       try {
-                        _firestore.collection('Services').doc(id).set(
-                          {
+                        _firestore
+                            .collection('Services')
+                            .doc(servicedata["Services"][0])
+                            .update({
+                          id: {
                             'Name': targetusername,
                             'Email': targetuseremail,
-                          },
-                        );
+                          }
+                        });
                       } catch (e) {
                         print(e);
                       }
