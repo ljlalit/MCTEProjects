@@ -157,25 +157,10 @@ class _signupState extends State<signup> {
             height: 55.0,
           ),
           RedButton(
-            text: 'Continue as Admin',
+            text: 'Sign Up as Admin',
             c: Colors.redAccent,
-            onPressed: () async {
-              try {
-                final newUser = await _auth.createUserWithEmailAndPassword(
-                    email: email, password: password);
-                try {
-                  await newUser.user.sendEmailVerification();
-                } catch (e) {
-                  print(
-                      "An error occured while trying to send email verification");
-                  print(e.message);
-                }
-                if (newUser != null) {
-                  Navigator.pushNamed(context, 'firstadmin');
-                }
-              } catch (e) {
-                print(e);
-              }
+            onPressed: () {
+              Navigator.pushNamed(context, 'firstadmin');
             },
             width: 400.0,
             height: 55.0,
