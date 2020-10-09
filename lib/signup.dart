@@ -4,7 +4,6 @@ import 'package:QRhelp/RedButton.dart';
 import 'constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 // ignore: camel_case_types
 
 // ignore: camel_case_types
@@ -126,31 +125,32 @@ class _signupState extends State<signup> {
           SizedBox(
             height: MediaQuery.of(context).viewInsets.bottom,
           ),
-          SizedBox(
-            height: 100.0,
-          ),
+          // SizedBox(
+          //   height: 100.0,
+          // ),
           RedButton(
             text: 'Continue',
             c: Colors.redAccent,
             onPressed: () async {
-              if(password != cpass){
+              if (password != cpass) {
                 print("Password fields dont match!");
-              }else{
+              } else {
+                try {
+                  final newUser = await _auth.createUserWithEmailAndPassword(
+                      email: email.trim(), password: password);
                   try {
-                    final newUser = await _auth.createUserWithEmailAndPassword(
-                        email: email.trim(), password: password);
-                    try {
-                      await newUser.user.sendEmailVerification();
-                    } catch (e) {
-                      print("An error occured while trying to send email verification");
-                      print(e.message);
-                    }
-                    if (newUser != null) {
-                      Navigator.pushNamed(context, 'firstsign');
-                    }
+                    await newUser.user.sendEmailVerification();
                   } catch (e) {
-                    print(e);
+                    print(
+                        "An error occured while trying to send email verification");
+                    print(e.message);
                   }
+                  if (newUser != null) {
+                    Navigator.pushNamed(context, 'firstsign');
+                  }
+                } catch (e) {
+                  print(e);
+                }
               }
             },
             width: 400.0,
@@ -166,7 +166,8 @@ class _signupState extends State<signup> {
                 try {
                   await newUser.user.sendEmailVerification();
                 } catch (e) {
-                  print("An error occured while trying to send email verification");
+                  print(
+                      "An error occured while trying to send email verification");
                   print(e.message);
                 }
                 if (newUser != null) {
