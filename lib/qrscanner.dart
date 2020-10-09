@@ -21,6 +21,12 @@ class QRViewExample extends StatefulWidget {
 }
 
 class _QRViewExampleState extends State<QRViewExample> {
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
+
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   bool found;
@@ -211,6 +217,7 @@ class _QRViewExampleState extends State<QRViewExample> {
     });
     if (found) {
       Navigator.pushNamed(context, 'scannedreg');
+      controller.pauseCamera();
     } else {
       Navigator.push(
         context,
@@ -220,12 +227,13 @@ class _QRViewExampleState extends State<QRViewExample> {
                   servicedata: servicesdata,
                 )),
       );
+      controller.pauseCamera();
     }
   }
 
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   controller.dispose();
+  //   super.dispose();
+  // }
 }

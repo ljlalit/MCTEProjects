@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:QRhelp/RedButton.dart';
 
 // ignore: camel_case_types
 class scannedunreg extends StatelessWidget {
@@ -82,39 +83,22 @@ class scannedunreg extends StatelessWidget {
                 SizedBox(
                   width: 10.0,
                 ),
-                FlatButton(
-                  color: const Color(0xffe53935),
+                RedButton(
+                    c: Colors.lightBlueAccent,
+                    text: 'Scan again',
+                    height: 20.0,
+                    width: 150.0,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    }),
+                RedButton(
+                  text: 'Register',
+                  c: Colors.redAccent,
+                  height: 20.0,
+                  width: 150.0,
                   onPressed: () {
-                    Navigator.pop(context);
+                    //TODO: onPressed Registered
                   },
-                  child: Text(
-                    'Back',
-                    style: TextStyle(
-                      fontFamily: 'NeueKabel',
-                      fontSize: 29,
-                      color: const Color(0xffffffff),
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                SizedBox(),
-                SizedBox(),
-                SizedBox(),
-                SizedBox(),
-                FlatButton(
-                  color: const Color(0xffe53935),
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'scanreg');
-                  },
-                  child: Text(
-                    'Register',
-                    style: TextStyle(
-                      fontFamily: 'NeueKabel',
-                      fontSize: 29,
-                      color: const Color(0xffffffff),
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
                 ),
                 SizedBox(
                   width: 10.0,
