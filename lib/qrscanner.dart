@@ -1,4 +1,5 @@
 import 'package:QRhelp/RedButton.dart';
+import 'package:QRhelp/scannedreg.dart';
 import 'package:QRhelp/scannedunreg.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -216,15 +217,19 @@ class _QRViewExampleState extends State<QRViewExample> {
       print(e);
     });
     if (found) {
-      Navigator.pushNamed(context, 'scannedreg');
-      controller.pauseCamera();
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => scannedreg(
+                  targetuserid: qrText.toString(),
+                )),
+      );
     } else {
       Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => scannedunreg(
-                  targetuserdata: targetuserdata,
-                  servicedata: servicesdata,
+                  targetuserid: qrText.toString(),
                 )),
       );
       controller.pauseCamera();

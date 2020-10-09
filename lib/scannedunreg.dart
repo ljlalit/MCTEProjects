@@ -1,11 +1,77 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:QRhelp/RedButton.dart';
+import 'constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore: camel_case_types
-class scannedunreg extends StatelessWidget {
-  final targetuserdata;
-  final servicedata;
-  scannedunreg({this.targetuserdata, this.servicedata});
+class scannedunreg extends StatefulWidget {
+  final String targetuserid;
+  scannedunreg({this.targetuserid});
+
+  @override
+  _scannedunregState createState() => _scannedunregState();
+}
+
+class _scannedunregState extends State<scannedunreg> {
+  final _firestore = FirebaseFirestore.instance;
+  final _auth = FirebaseAuth.instance;
+  String id;
+  User loggedinUser;
+  var servicedocref;
+  var servicedata;
+  var targetuserdocref;
+  var targetuserdata;
+  var targetusername;
+  var targetuseremail;
+  var targetuserservices;
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+    id = widget.targetuserid;
+  }
+
+  void getCurrentUser() async {
+    try {
+      // ignore: await_only_futures
+      final user = await _auth.currentUser;
+      if (user != null) {
+        loggedinUser = user;
+        servicedocref = _firestore.collection("users").doc(loggedinUser.uid);
+        servicedocref.get().then((value) {
+          if (value.exists) {
+            servicedata = value.data();
+            getTargetUser();
+          }
+        }).catchError((e) {
+          print(e);
+        });
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void getTargetUser() {
+    targetuserdocref = _firestore.collection("users").doc(id);
+    targetuserdocref.get().then((value) {
+      if (value.exists) {
+        targetuserdata = value.data();
+        setState(() {
+          this.targetusername = targetuserdata["Name"];
+          this.targetuseremail = targetuserdata["Email"];
+          this.targetuserservices = targetuserdata["Services"];
+          targetuserservices.add(servicedata["Services"][0]);
+        });
+      }
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +120,7 @@ class scannedunreg extends StatelessWidget {
                 ),
                 children: [
                   TextSpan(
-                    text: 'Username\'s \n',
+                    text: '${targetusername} \n',
                     style: TextStyle(
                       fontFamily: 'NeueKabel',
                     ),
@@ -92,14 +158,31 @@ class scannedunreg extends StatelessWidget {
                       Navigator.pop(context);
                     }),
                 RedButton(
-                  text: 'Register',
-                  c: Colors.redAccent,
-                  height: 20.0,
-                  width: 150.0,
-                  onPressed: () {
-                    //TODO: onPressed Registered
-                  },
-                ),
+                    text: 'Register',
+                    c: Colors.redAccent,
+                    height: 20.0,
+                    width: 150.0,
+                    onPressed: () async {
+                      try {
+                        _firestore.collection('Services').doc(id).set(
+                          {
+                            'Name': targetusername,
+                            'Email': targetuseremail,
+                          },
+                        );
+                      } catch (e) {
+                        print(e);
+                      }
+                      try {
+                        _firestore.collection('Users').doc(id).set(
+                          {
+                            'Services': targetuserservices,
+                          },
+                        );
+                      } catch (e) {
+                        print(e);
+                      }
+                    }),
                 SizedBox(
                   width: 10.0,
                 ),

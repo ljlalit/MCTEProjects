@@ -1,7 +1,41 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore: camel_case_types
-class scannedreg extends StatelessWidget {
+class scannedreg extends StatefulWidget {
+  final String targetuserid;
+  scannedreg({this.targetuserid});
+  @override
+  _scannedregState createState() => _scannedregState();
+}
+
+class _scannedregState extends State<scannedreg> {
+  final _firestore = FirebaseFirestore.instance;
+  String id;
+  var targetuserdocref;
+  var targetuserdata;
+  var targetusername;
+  @override
+  void initState() {
+    super.initState();
+    id = widget.targetuserid;
+  }
+
+  void getTargetUser() {
+    targetuserdocref = _firestore.collection("users").doc(id);
+    targetuserdocref.get().then((value) {
+      if (value.exists) {
+        targetuserdata = value.data();
+        setState(() {
+          this.targetusername = targetuserdata["Name"];
+        });
+      }
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +84,7 @@ class scannedreg extends StatelessWidget {
                 ),
                 children: [
                   TextSpan(
-                    text: 'Username\'s \n',
+                    text: '${targetusername}',
                     style: TextStyle(
                       fontFamily: 'NeueKabel',
                     ),

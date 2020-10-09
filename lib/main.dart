@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
       'profile': (context) => profile(),
       'services': (context) => userservices(),
       'adminhome': (context) => adminhome(),
-      'scanreg': (context) => scannedreg(),
       'qrscanner': (context) => QRViewExample(),
       'firstadmin': (context) => firstadmin(),
     });
