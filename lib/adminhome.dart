@@ -55,20 +55,57 @@ class adminhome extends StatelessWidget {
               ),
             ),
           ),
-          FlatButton(
-            onPressed: () {
-              Navigator.pushNamed(context, 'qrscanner');
-            },
-            color: const Color(0xffe53935),
-            child: Text(
-              'Scan',
-              style: TextStyle(
-                fontFamily: 'NeueKabel',
-                fontSize: 29,
-                color: const Color(0xffffffff),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              SizedBox(),
+              FlatButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, 'qrscanner');
+                },
+                color: const Color(0xffe53935),
+                child: Text(
+                  'Scan',
+                  style: TextStyle(
+                    fontFamily: 'NeueKabel',
+                    fontSize: 29,
+                    color: const Color(0xffffffff),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ),
-              textAlign: TextAlign.center,
-            ),
+              FlatButton(
+                color: const Color(0xffe53935),
+                onPressed: () {
+                  Navigator.pushNamed(context, 'login');
+                },
+                child: Text(
+                  'Logout',
+                  style: TextStyle(
+                    fontFamily: 'NeueKabel',
+                    fontSize: 29,
+                    color: const Color(0xffffffff),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              FlatButton(
+                color: const Color(0xffe53935),
+                onPressed: () {
+                  Navigator.pushNamed(context, 'adminservices');
+                },
+                child: Text(
+                  'Show All',
+                  style: TextStyle(
+                    fontFamily: 'NeueKabel',
+                    fontSize: 29,
+                    color: const Color(0xffffffff),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              SizedBox()
+            ],
           ),
         ],
       ),

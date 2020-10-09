@@ -1,4 +1,5 @@
 import 'package:QRhelp/adminhome.dart';
+import 'package:QRhelp/adminservices.dart';
 import 'package:QRhelp/firstadmin.dart';
 import 'package:QRhelp/firstsign.dart';
 import 'package:QRhelp/home.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
       'adminhome': (context) => adminhome(),
       'qrscanner': (context) => QRViewExample(),
       'firstadmin': (context) => firstadmin(),
+      'adminservices': (context) => adminservices(),
     });
   }
 }
