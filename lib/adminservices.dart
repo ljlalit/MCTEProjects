@@ -25,6 +25,10 @@ class _adminservicesState extends State<adminservices> {
   var docref;
   int arrlen = 0;
   var arr = [];
+  var servicesdata;
+  var servicesdocref;
+  int servicesarrlen = 0;
+  var servicesarr = [];
   void getCurrentUser() async {
     try {
       // ignore: await_only_futures
@@ -38,6 +42,7 @@ class _adminservicesState extends State<adminservices> {
             setState(() {
               this.arr = data['Services'];
               this.arrlen = this.arr.length;
+              getServiceUsers();
             });
           }
         }).catchError((e) {
@@ -47,6 +52,21 @@ class _adminservicesState extends State<adminservices> {
     } catch (e) {
       print(e);
     }
+  }
+
+  void getServiceUsers() {
+    servicesdocref = _firestore.collection("services").doc(arr[0]);
+    servicesdocref.get().then((value) {
+      if (value.exists) {
+        servicesdata = value.data();
+        setState(() {
+          this.servicesarr = servicesdata;
+          this.servicesarrlen = this.servicesarr.length;
+        });
+      }
+    }).catchError((e) {
+      print(e);
+    });
   }
 
   @override
@@ -71,7 +91,7 @@ class _adminservicesState extends State<adminservices> {
               ]),
           for (int i = 0; i < arrlen; i++)
             Text(
-              '${arr[i].toString()}',
+              '${arr[i]['Name'].toString()}',
               style: TextStyle(
                 fontFamily: 'Segoe UI',
                 fontSize: 34,

@@ -23,6 +23,7 @@ class _homeState extends State<home> {
   }
 
   String name = 'loading';
+  String type;
   var docref;
   var data;
 
@@ -38,6 +39,7 @@ class _homeState extends State<home> {
             data = value.data();
             setState(() {
               this.name = data['Name'];
+              this.type = data['Type'];
             });
           }
         }).catchError((e) {
@@ -51,6 +53,9 @@ class _homeState extends State<home> {
 
   @override
   Widget build(BuildContext context) {
+    if (type == 'admin') {
+      Navigator.pushNamed(context, 'adminhome');
+    }
     return SafeArea(
         child: Scaffold(
             backgroundColor: const Color(0xffffffff),
