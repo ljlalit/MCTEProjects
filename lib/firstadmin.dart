@@ -14,11 +14,15 @@ class firstadmin extends StatefulWidget {
 
 // ignore: camel_case_types
 class _firstadminState extends State<firstadmin> {
+  final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   String email;
   String password;
   String cpass;
   String dropdownValue;
+  String skey;
+  var docref;
+  var data;
 
   @override
   Widget build(BuildContext context) {
@@ -181,21 +185,37 @@ class _firstadminState extends State<firstadmin> {
               if (password != cpass) {
                 print("Password fields dont match!");
               } else {
-                try {
-                  final newUser = await _auth.createUserWithEmailAndPassword(
-                      email: email.trim(), password: password);
+                if (skey == "16305") {
                   try {
-                    await newUser.user.sendEmailVerification();
+                    final newUser = await _auth.createUserWithEmailAndPassword(
+                        email: email.trim(), password: password);
+                    try {
+                      await newUser.user.sendEmailVerification();
+                    } catch (e) {
+                      print(
+                          "An error occured while trying to send email verification");
+                      print(e.message);
+                    }
+                    if (newUser != null) {
+                      try {
+                        _firestore
+                            .collection('users')
+                            .doc(newUser.user.uid)
+                            .set({
+                          'Email': newUser.user.email,
+                          'Services': [dropdownValue.toString()],
+                          'Type': 'admin',
+                        });
+                      } catch (e) {
+                        print(e);
+                      }
+                      Navigator.pushNamed(context, 'firstadmin');
+                    }
                   } catch (e) {
-                    print(
-                        "An error occured while trying to send email verification");
-                    print(e.message);
+                    print(e);
                   }
-                  if (newUser != null) {
-                    Navigator.pushNamed(context, 'adminhome');
-                  }
-                } catch (e) {
-                  print(e);
+                } else {
+                  print("Service Key Invalid!");
                 }
               }
             },
