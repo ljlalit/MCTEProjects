@@ -18,7 +18,6 @@ class _homeState extends State<home> {
   @override
   void initState() {
     super.initState();
-
     getCurrentUser();
   }
 
@@ -40,6 +39,9 @@ class _homeState extends State<home> {
             setState(() {
               this.name = data['Name'];
               this.type = data['Type'];
+              if (type == 'admin') {
+                Navigator.pushNamed(context, 'adminhome');
+              }
             });
           }
         }).catchError((e) {
@@ -53,9 +55,6 @@ class _homeState extends State<home> {
 
   @override
   Widget build(BuildContext context) {
-    if (type == 'admin') {
-      Navigator.pushNamed(context, 'adminhome');
-    }
     return SafeArea(
         child: Scaffold(
             backgroundColor: const Color(0xffffffff),
