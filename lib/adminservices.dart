@@ -61,6 +61,7 @@ class _adminservicesState extends State<adminservices> {
         servicesdata = value.data();
         setState(() {
           this.servicesarr = servicesdata;
+          print(servicesarr);
           this.servicesarrlen = this.servicesarr.length;
         });
       }
@@ -80,7 +81,7 @@ class _adminservicesState extends State<adminservices> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Text(
-                  'All Services',
+                  'Users re',
                   style: TextStyle(
                     fontFamily: 'Segoe UI',
                     fontSize: 40,
@@ -90,15 +91,16 @@ class _adminservicesState extends State<adminservices> {
                 ),
               ]),
           for (int i = 0; i < arrlen; i++)
-            Text(
-              '${arr[i]['Name'].toString()}',
-              style: TextStyle(
-                fontFamily: 'Segoe UI',
-                fontSize: 34,
-                color: const Color(0xff090909),
+            if (servicesarrlen != 0)
+              Text(
+                '${servicesarr[i]['Name'].toString()}',
+                style: TextStyle(
+                  fontFamily: 'Segoe UI',
+                  fontSize: 34,
+                  color: const Color(0xff090909),
+                ),
+                textAlign: TextAlign.left,
               ),
-              textAlign: TextAlign.left,
-            ),
 
           //Jo bhi changes krne ho krdiyo
           //services daaliyo font size 34 tho
