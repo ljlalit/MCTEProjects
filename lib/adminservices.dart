@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:QRhelp/RedButton.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,11 +26,12 @@ class _adminservicesState extends State<adminservices> {
   var data;
   var docref;
   int arrlen = 0;
-  var arr = [];
+  var arr;
   var servicesdata;
   var servicesdocref;
   int servicesarrlen = 0;
   var servicesarr = [];
+  LinkedHashMap asd;
   void getCurrentUser() async {
     try {
       // ignore: await_only_futures
@@ -55,16 +58,19 @@ class _adminservicesState extends State<adminservices> {
   }
 
   void getServiceUsers() {
-    servicesdocref = _firestore.collection("services").doc(arr[0]);
+    servicesdocref =
+        _firestore.collection("servicelist").doc(arr[0].toString());
     servicesdocref.get().then((value) {
       if (value.exists) {
         servicesdata = value.data();
         setState(() {
-          this.servicesarr = servicesdata;
-          print(servicesarr);
-          this.servicesarrlen = this.servicesarr.length;
+          this.asd = servicesdata;
+          asd.forEach((key, value) {
+            this.servicesarr.add(value["Name"]);
+          });
+          this.servicesarrlen = servicesarr.length;
         });
-      }
+      } else {}
     }).catchError((e) {
       print(e);
     });
@@ -90,10 +96,10 @@ class _adminservicesState extends State<adminservices> {
                   textAlign: TextAlign.left,
                 ),
               ]),
-          for (int i = 0; i < arrlen; i++)
+          for (int i = 0; i < servicesarrlen; i++)
             if (servicesarrlen != 0)
               Text(
-                '${servicesarr[i]['Name'].toString()}',
+                '${servicesarr[i]}',
                 style: TextStyle(
                   fontFamily: 'Segoe UI',
                   fontSize: 34,
