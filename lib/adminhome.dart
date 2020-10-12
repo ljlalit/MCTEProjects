@@ -1,5 +1,6 @@
 import 'package:QRhelp/scannedreg.dart';
 import 'package:flutter/material.dart';
+import 'package:QRhelp/RedButton.dart';
 
 // ignore: camel_case_types
 class adminhome extends StatelessWidget {
@@ -59,52 +60,43 @@ class adminhome extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               SizedBox(),
-              FlatButton(
+              RedButton(
+                text: 'Scan',
+                width: 150.0,
+                height: 20.0,
+                c: Colors.redAccent,
                 onPressed: () {
-                  Navigator.pushNamed(context, 'qrscanner');
+                  Navigator.pushNamed(
+                    context,
+                    'qrscanner',
+                  );
                 },
-                color: const Color(0xffe53935),
-                child: Text(
-                  'Scan',
-                  style: TextStyle(
-                    fontFamily: 'NeueKabel',
-                    fontSize: 29,
-                    color: const Color(0xffffffff),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
               ),
-              FlatButton(
-                color: const Color(0xffe53935),
+              RedButton(
+                text: 'Show All',
+                width: 150.0,
+                height: 20.0,
+                c: Colors.redAccent,
                 onPressed: () {
-                  Navigator.pushNamed(context, 'login');
+                  Navigator.pushNamed(
+                    context,
+                    'adminservices',
+                  );
                 },
-                child: Text(
-                  'Logout',
-                  style: TextStyle(
-                    fontFamily: 'NeueKabel',
-                    fontSize: 29,
-                    color: const Color(0xffffffff),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
               ),
-              FlatButton(
-                color: const Color(0xffe53935),
+              RedButton(
+                text: 'Logout',
+                width: 100.0,
+                height: 20.0,
+                c: Colors.lightBlueAccent,
                 onPressed: () {
-                  Navigator.pushNamed(context, 'adminservices');
+                  Navigator.pushNamed(
+                    context,
+                    'login',
+                  );
                 },
-                child: Text(
-                  'Show All',
-                  style: TextStyle(
-                    fontFamily: 'NeueKabel',
-                    fontSize: 29,
-                    color: const Color(0xffffffff),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
               ),
-              SizedBox()
+              SizedBox(),
             ],
           ),
         ],
