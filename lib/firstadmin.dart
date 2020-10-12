@@ -133,7 +133,7 @@ class _firstadminState extends State<firstadmin> {
           TextField(
             obscureText: true,
             onChanged: (value) {
-              cpass = value;
+              skey = value;
             },
             decoration: kTextFieldDecoration.copyWith(
               labelText: 'Admin Key',
