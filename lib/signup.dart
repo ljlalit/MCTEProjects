@@ -79,8 +79,8 @@ class _signupState extends State<signup> {
             ),
             textAlign: TextAlign.center,
             displayFullTextOnTap: true,
-            totalRepeatCount: 2,
-            speed: Duration(milliseconds: 200),
+            totalRepeatCount: 1,
+            speed: Duration(milliseconds: 75),
           ),
           SizedBox(
             height: 2.0,
@@ -158,8 +158,7 @@ class _signupState extends State<signup> {
                       context: context,
                       style: alertStyle,
                       type: AlertType.error,
-                      title:
-                          "An error occured while trying to send email verification",
+                      title: '${e.message}',
                       buttons: [
                         DialogButton(
                           child: Text(
@@ -182,8 +181,7 @@ class _signupState extends State<signup> {
                     context: context,
                     style: alertStyle,
                     type: AlertType.error,
-                    title: "Invalid Email or user already exist",
-                    desc: "Enter correct Email",
+                    title: '${e.message}',
                     buttons: [
                       DialogButton(
                         child: Text(

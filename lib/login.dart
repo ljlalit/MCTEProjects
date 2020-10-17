@@ -88,8 +88,8 @@ class _loginState extends State<login> {
             ),
             textAlign: TextAlign.center,
             displayFullTextOnTap: true,
-            totalRepeatCount: 2,
-            speed: Duration(milliseconds: 200),
+            totalRepeatCount: 1,
+            speed: Duration(milliseconds: 75),
           ),
           SizedBox(
             height: 2.0,
@@ -160,7 +160,7 @@ class _loginState extends State<login> {
                   context: context,
                   style: alertStyle,
                   type: AlertType.error,
-                  title: "Invalid Email/Password",
+                  title: '${e.message}',
                   buttons: [
                     DialogButton(
                       child: Text(
