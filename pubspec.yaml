@@ -32,6 +32,7 @@ dependencies:
   qr_code_scanner: ^0.0.13
   rflutter_alert: ^1.1.0
   animated_text_kit: ^2.4.0
+  page_transition: ^1.1.7+2
 
 
   # The following adds the Cupertino Icons font to your application.

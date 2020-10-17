@@ -1,3 +1,4 @@
+import 'package:QRhelp/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:QRhelp/RedButton.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:QRhelp/constants.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'buildTextField.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:page_transition/page_transition.dart';
 
 // ignore: camel_case_types
 class login extends StatefulWidget {
@@ -183,7 +185,10 @@ class _loginState extends State<login> {
             text: 'SignUp',
             c: Colors.blueAccent,
             onPressed: () {
-              Navigator.pushNamed(context, 'signup');
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.rightToLeft, child: signup()));
             },
             width: 200.0,
             height: 20.0,

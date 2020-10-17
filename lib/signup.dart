@@ -1,3 +1,5 @@
+import 'package:QRhelp/firstadmin.dart';
+import 'package:QRhelp/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:QRhelp/RedButton.dart';
@@ -5,6 +7,7 @@ import 'constants.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'buildTextField.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:page_transition/page_transition.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore: camel_case_types
@@ -203,7 +206,10 @@ class _signupState extends State<signup> {
             text: 'Sign Up as Admin',
             c: Colors.redAccent,
             onPressed: () {
-              Navigator.pushNamed(context, 'firstadmin');
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.fade, child: firstadmin()));
             },
             width: 400.0,
             height: 55.0,
@@ -215,7 +221,10 @@ class _signupState extends State<signup> {
             text: 'Login',
             c: Colors.blueAccent,
             onPressed: () {
-              Navigator.pushNamed(context, 'login');
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.leftToRight, child: login()));
             },
             width: 200.0,
             height: 20.0,
