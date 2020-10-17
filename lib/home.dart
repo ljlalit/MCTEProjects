@@ -1,6 +1,8 @@
+import 'package:QRhelp/homenav.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 // ignore: camel_case_types
 class home extends StatefulWidget {
@@ -69,7 +71,11 @@ class _homeState extends State<home> {
                         Container(
                           child: InkWell(
                               onTap: () {
-                                Navigator.pushNamed(context, 'homenav');
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        type: PageTransitionType.leftToRight,
+                                        child: homenav()));
                               },
 
                               // Adobe XD layer: 'baseline_account_ci…' (shape)
