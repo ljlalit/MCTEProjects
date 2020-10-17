@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:collection';
+import 'package:QRhelp/adminhome.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:QRhelp/RedButton.dart';
@@ -44,6 +45,7 @@ class _scannedunregState extends State<scannedunreg> {
         servicedocref.get().then((value) {
           if (value.exists) {
             servicedata = value.data();
+            print(servicedata["Services"]);
             getTargetUser();
           }
         }).catchError((e) {
@@ -64,7 +66,7 @@ class _scannedunregState extends State<scannedunreg> {
           this.targetusername = targetuserdata["Name"];
           this.targetuseremail = targetuserdata["Email"];
           this.targetuserservices = targetuserdata["Services"];
-          targetuserservices.add(servicedata["Services"][0]);
+          //print(targetuserservices);
         });
       }
     }).catchError((e) {
@@ -165,7 +167,7 @@ class _scannedunregState extends State<scannedunreg> {
                     onPressed: () async {
                       try {
                         _firestore
-                            .collection('Services')
+                            .collection('servicelist')
                             .doc(servicedata["Services"][0])
                             .update({
                           id: {
@@ -176,8 +178,10 @@ class _scannedunregState extends State<scannedunreg> {
                       } catch (e) {
                         print(e);
                       }
+                      targetuserservices.add(servicedata["Services"][0]);
+                      print(targetuserservices);
                       try {
-                        _firestore.collection('Users').doc(id).set(
+                        _firestore.collection('users').doc(id).update(
                           {
                             'Services': targetuserservices,
                           },
@@ -185,6 +189,7 @@ class _scannedunregState extends State<scannedunreg> {
                       } catch (e) {
                         print(e);
                       }
+                      Navigator.pushNamed(context, 'adminhome');
                     }),
                 SizedBox(
                   width: 10.0,
