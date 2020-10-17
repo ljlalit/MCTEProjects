@@ -3,6 +3,7 @@ import 'package:QRhelp/RedButton.dart';
 import 'package:flutter/material.dart';
 import 'package:QRhelp/constants.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'buildTextField.dart';
 
 // ignore: camel_case_types
 class login extends StatefulWidget {
@@ -85,36 +86,24 @@ class _loginState extends State<login> {
           SizedBox(
             height: 2.0,
           ),
-          TextField(
-            keyboardType: TextInputType.emailAddress,
+          BuildTextField(
+            kType: TextInputType.emailAddress,
+            otext: false,
+            ltext: 'Email',
             onChanged: (value) {
               email = value;
             },
-            decoration: kTextFieldDecoration.copyWith(
-              labelText: 'Email',
-            ),
-            style: TextStyle(
-              fontFamily: 'Segoe UI',
-              fontSize: 24,
-            ),
-            textAlign: TextAlign.left,
           ),
           SizedBox(
             height: 5.0,
           ),
-          TextField(
-            obscureText: true,
+          BuildTextField(
+            kType: TextInputType.visiblePassword,
+            otext: true,
+            ltext: 'Password',
             onChanged: (value) {
               password = value;
             },
-            decoration: kTextFieldDecoration.copyWith(
-              labelText: 'Password',
-            ),
-            style: TextStyle(
-              fontFamily: 'Segoe UI',
-              fontSize: 24,
-            ),
-            textAlign: TextAlign.left,
           ),
           SizedBox(
             height: MediaQuery.of(context).viewInsets.bottom,
@@ -198,3 +187,27 @@ class _loginState extends State<login> {
     );
   }
 }
+
+// class BuildTextField extends StatelessWidget {
+//   final onChanged;
+//   final String ltext;
+//   final bool otext;
+//   BuildTextField({this.ltext, this.onChanged,this.otext});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return TextField(
+//       // keyboardType: TextInputType.emailAddress,
+//       obscureText: otext,
+//       onChanged: onChanged,
+//       decoration: kTextFieldDecoration.copyWith(
+//         labelText: ltext,
+//       ),
+//       style: TextStyle(
+//         fontFamily: 'Segoe UI',
+//         fontSize: 24,
+//       ),
+//       textAlign: TextAlign.left,
+//     );
+//   }
+// }

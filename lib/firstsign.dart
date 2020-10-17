@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'constants.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'buildTextField.dart';
 
 // ignore: camel_case_types
 class firstsign extends StatefulWidget {
@@ -64,64 +65,43 @@ class _firstsignState extends State<firstsign> {
               ),
             ),
             Expanded(
-              child: TextField(
+              child: BuildTextField(
+                kType: TextInputType.name,
+                otext: false,
+                ltext: 'Name',
                 onChanged: (value) {
                   name = value;
                 },
-                decoration: kTextFieldDecoration.copyWith(
-                  labelText: 'Name',
-                ),
-                style: TextStyle(
-                  fontFamily: 'Segoe UI',
-                  fontSize: 24,
-                ),
-                textAlign: TextAlign.left,
               ),
             ),
             Expanded(
-              child: TextField(
+              child: BuildTextField(
+                kType: TextInputType.number,
+                otext: false,
+                ltext: 'Number',
                 onChanged: (value) {
                   number = value;
                 },
-                decoration: kTextFieldDecoration.copyWith(
-                  labelText: 'Number',
-                ),
-                keyboardType: TextInputType.number,
-                style: TextStyle(
-                  fontFamily: 'Segoe UI',
-                  fontSize: 24,
-                ),
-                textAlign: TextAlign.left,
               ),
             ),
             Expanded(
-              child: TextField(
+              child: BuildTextField(
+                kType: TextInputType.name,
+                otext: false,
+                ltext: 'Rank',
                 onChanged: (value) {
                   rank = value;
                 },
-                decoration: kTextFieldDecoration.copyWith(
-                  labelText: 'Rank',
-                ),
-                style: TextStyle(
-                  fontFamily: 'Segoe UI',
-                  fontSize: 24,
-                ),
-                textAlign: TextAlign.left,
               ),
             ),
             Expanded(
-              child: TextField(
+              child: BuildTextField(
+                kType: TextInputType.name,
+                otext: false,
+                ltext: 'Unit',
                 onChanged: (value) {
                   unit = value;
                 },
-                decoration: kTextFieldDecoration.copyWith(
-                  labelText: 'Unit',
-                ),
-                style: TextStyle(
-                  fontFamily: 'Segoe UI',
-                  fontSize: 24,
-                ),
-                textAlign: TextAlign.left,
               ),
             ),
             SizedBox(

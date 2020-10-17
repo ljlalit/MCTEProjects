@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:QRhelp/RedButton.dart';
 import 'constants.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'buildTextField.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore: camel_case_types
@@ -75,53 +76,35 @@ class _signupState extends State<signup> {
           SizedBox(
             height: 2.0,
           ),
-          TextField(
-            keyboardType: TextInputType.emailAddress,
-            textAlign: TextAlign.left,
+          BuildTextField(
+            kType: TextInputType.emailAddress,
+            otext: false,
+            ltext: 'Email',
             onChanged: (value) {
               email = value;
             },
-            decoration: kTextFieldDecoration.copyWith(
-              labelText: 'Email',
-            ),
-            style: TextStyle(
-              fontFamily: 'Segoe UI',
-              fontSize: 24,
-            ),
           ),
           SizedBox(
             height: 5.0,
           ),
-          TextField(
-            obscureText: true,
+          BuildTextField(
+            kType: TextInputType.visiblePassword,
+            otext: true,
+            ltext: 'Password',
             onChanged: (value) {
               password = value;
             },
-            decoration: kTextFieldDecoration.copyWith(
-              labelText: 'Password',
-            ),
-            style: TextStyle(
-              fontFamily: 'Segoe UI',
-              fontSize: 24,
-            ),
-            textAlign: TextAlign.left,
           ),
           SizedBox(
             height: 5.0,
           ),
-          TextField(
-            obscureText: true,
+          BuildTextField(
+            kType: TextInputType.visiblePassword,
+            otext: true,
+            ltext: 'Confirm Password',
             onChanged: (value) {
               cpass = value;
             },
-            decoration: kTextFieldDecoration.copyWith(
-              labelText: 'Confirm Password',
-            ),
-            style: TextStyle(
-              fontFamily: 'Segoe UI',
-              fontSize: 24,
-            ),
-            textAlign: TextAlign.left,
           ),
           SizedBox(
             height: MediaQuery.of(context).viewInsets.bottom,
