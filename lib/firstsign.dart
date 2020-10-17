@@ -148,7 +148,27 @@ class _firstsignState extends State<firstsign> {
                       if (!loggedinUser.emailVerified) {
                         print(loggedinUser.emailVerified);
                         await _auth.signOut();
-                        Navigator.pushNamed(context, 'login');
+                        // Navigator.pushNamed(context, 'login');
+                        Alert(
+                          context: context,
+                          style: alertStyle,
+                          type: AlertType.info,
+                          title: "Verification email sent",
+                          desc: "Verify and Login to proceed",
+                          buttons: [
+                            DialogButton(
+                              child: Text(
+                                "Login",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              onPressed: () =>
+                                  Navigator.pushNamed(context, 'login'),
+                              color: Color.fromRGBO(0, 179, 134, 1.0),
+                              radius: BorderRadius.circular(0.0),
+                            ),
+                          ],
+                        ).show();
                       } else {
                         Navigator.pushNamed(context, 'home');
                       }
