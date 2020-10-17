@@ -4,6 +4,7 @@ import 'package:QRhelp/RedButton.dart';
 import 'constants.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'buildTextField.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore: camel_case_types
@@ -64,14 +65,19 @@ class _signupState extends State<signup> {
             ),
             textAlign: TextAlign.center,
           ),
-          Text(
-            'Military College of Telecommunication\nEngineering',
-            style: TextStyle(
+          TypewriterAnimatedTextKit(
+            text: [
+              'Military College of Telecommunication\nEngineering',
+            ],
+            textStyle: TextStyle(
               fontFamily: 'NeueKabel',
               fontSize: 24,
               color: const Color(0xff000000),
             ),
             textAlign: TextAlign.center,
+            displayFullTextOnTap: true,
+            totalRepeatCount: 2,
+            speed: Duration(milliseconds: 200),
           ),
           SizedBox(
             height: 2.0,
