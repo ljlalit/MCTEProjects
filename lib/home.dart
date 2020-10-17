@@ -63,7 +63,9 @@ class _homeState extends State<home> {
             body: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  SizedBox(),
+                  SizedBox(
+                    height: 0.1,
+                  ),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -142,8 +144,8 @@ class _homeState extends State<home> {
                     }),
                     child: Container(
                       width: MediaQuery.of(context).copyWith().size.width,
-                      height:
-                          MediaQuery.of(context).copyWith().size.height / 3.5,
+                      height: 180.0,
+                      // MediaQuery.of(context).copyWith().size.height / 3.5,
                       decoration: BoxDecoration(
                         color: const Color(0xffe53935),
                       ),
