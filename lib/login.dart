@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:QRhelp/RedButton.dart';
 import 'package:flutter/material.dart';
 import 'package:QRhelp/constants.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 // ignore: camel_case_types
 class login extends StatefulWidget {
@@ -136,11 +137,45 @@ class _loginState extends State<login> {
                     Navigator.pushNamed(context, 'home');
                   } else {
                     _auth.signOut();
-                    Navigator.pushNamed(context, 'login');
+                    // Navigator.pushNamed(context, 'login');
+                    Alert(
+                      context: context,
+                      style: alertStyle,
+                      type: AlertType.error,
+                      title: "Email not verified",
+                      buttons: [
+                        DialogButton(
+                          child: Text(
+                            "OK",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          onPressed: () => Navigator.pop(context),
+                          color: Color.fromRGBO(0, 179, 134, 1.0),
+                          radius: BorderRadius.circular(0.0),
+                        ),
+                      ],
+                    ).show();
                   }
                 }
               } catch (e) {
-                print(e);
+                // print(e);
+                Alert(
+                  context: context,
+                  style: alertStyle,
+                  type: AlertType.error,
+                  title: "Invalid Email/Password",
+                  buttons: [
+                    DialogButton(
+                      child: Text(
+                        "OK",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                      color: Color.fromRGBO(0, 179, 134, 1.0),
+                      radius: BorderRadius.circular(0.0),
+                    ),
+                  ],
+                ).show();
               }
             },
             width: 400.0,

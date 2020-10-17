@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:QRhelp/RedButton.dart';
 import 'constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 // ignore: camel_case_types
 
@@ -183,7 +184,24 @@ class _firstadminState extends State<firstadmin> {
             c: Colors.redAccent,
             onPressed: () async {
               if (password != cpass) {
-                print("Password fields dont match!");
+                // print("Password fields dont match!");
+                Alert(
+                  context: context,
+                  style: alertStyle,
+                  type: AlertType.error,
+                  title: "Password fields do not match!",
+                  buttons: [
+                    DialogButton(
+                      child: Text(
+                        "OK",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                      color: Color.fromRGBO(0, 179, 134, 1.0),
+                      radius: BorderRadius.circular(0.0),
+                    ),
+                  ],
+                ).show();
               } else {
                 if (skey == "16305") {
                   try {
@@ -192,9 +210,28 @@ class _firstadminState extends State<firstadmin> {
                     try {
                       await newUser.user.sendEmailVerification();
                     } catch (e) {
-                      print(
-                          "An error occured while trying to send email verification");
-                      print(e.message);
+                      // print(
+                      //     "An error occured while trying to send email verification");
+                      // print(e.message);
+                      Alert(
+                        context: context,
+                        style: alertStyle,
+                        type: AlertType.error,
+                        title:
+                            "An error occured while trying to send email verification",
+                        buttons: [
+                          DialogButton(
+                            child: Text(
+                              "OK",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                            onPressed: () => Navigator.pop(context),
+                            color: Color.fromRGBO(0, 179, 134, 1.0),
+                            radius: BorderRadius.circular(0.0),
+                          ),
+                        ],
+                      ).show();
                     }
                     if (newUser != null) {
                       try {
@@ -209,40 +246,95 @@ class _firstadminState extends State<firstadmin> {
                       } catch (e) {
                         print(e);
                       }
-                      Navigator.pushNamed(context, 'firstadmin');
+                      // Navigator.pushNamed(context, 'firstadmin');
+                      Alert(
+                        context: context,
+                        style: alertStyle,
+                        type: AlertType.info,
+                        title: "Verification email sent",
+                        desc: "Login to proceed",
+                        buttons: [
+                          DialogButton(
+                            child: Text(
+                              "Login",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                            onPressed: () =>
+                                Navigator.pushNamed(context, 'login'),
+                            color: Color.fromRGBO(0, 179, 134, 1.0),
+                            radius: BorderRadius.circular(0.0),
+                          ),
+                        ],
+                      ).show();
                     }
                   } catch (e) {
-                    print(e);
+                    // print(e);
+                    Alert(
+                      context: context,
+                      style: alertStyle,
+                      type: AlertType.error,
+                      title: "Invalid Email or user already exist",
+                      desc: "Enter correct Email",
+                      buttons: [
+                        DialogButton(
+                          child: Text(
+                            "OK",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          onPressed: () => Navigator.pop(context),
+                          color: Color.fromRGBO(0, 179, 134, 1.0),
+                          radius: BorderRadius.circular(0.0),
+                        ),
+                      ],
+                    ).show();
                   }
                 } else {
-                  print("Service Key Invalid!");
+                  // print("Service Key Invalid!");
+                  Alert(
+                    context: context,
+                    style: alertStyle,
+                    type: AlertType.error,
+                    title: "Invalid Admin key!",
+                    buttons: [
+                      DialogButton(
+                        child: Text(
+                          "OK",
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                        color: Color.fromRGBO(0, 179, 134, 1.0),
+                        radius: BorderRadius.circular(0.0),
+                      ),
+                    ],
+                  ).show();
                 }
               }
             },
             width: 400.0,
             height: 55.0,
           ),
-          RedButton(
-            text: 'Sign Up as User',
-            c: Colors.redAccent,
-            onPressed: () {
-              Navigator.pushNamed(context, 'signup');
-            },
-            width: 400.0,
-            height: 55.0,
-          ),
-          SizedBox(
-            width: 50.0,
-          ),
-          RedButton(
-            text: 'Login',
-            c: Colors.blueAccent,
-            onPressed: () {
-              Navigator.pushNamed(context, 'login');
-            },
-            width: 200.0,
-            height: 20.0,
-          ),
+          // RedButton(
+          //   text: 'Sign Up as User',
+          //   c: Colors.redAccent,
+          //   onPressed: () {
+          //     Navigator.pushNamed(context, 'signup');
+          //   },
+          //   width: 400.0,
+          //   height: 55.0,
+          // ),
+          // SizedBox(
+          //   width: 50.0,
+          // ),
+          // RedButton(
+          //   text: 'Login',
+          //   c: Colors.blueAccent,
+          //   onPressed: () {
+          //     Navigator.pushNamed(context, 'login');
+          //   },
+          //   width: 200.0,
+          //   height: 20.0,
+          // ),
         ],
       ),
     );

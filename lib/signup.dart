@@ -2,7 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:QRhelp/RedButton.dart';
 import 'constants.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore: camel_case_types
 
@@ -133,7 +134,24 @@ class _signupState extends State<signup> {
             c: Colors.redAccent,
             onPressed: () async {
               if (password != cpass) {
-                print("Password fields dont match!");
+                // print("Password fields dont match!");
+                Alert(
+                  context: context,
+                  style: alertStyle,
+                  type: AlertType.error,
+                  title: "Password fields do not match!",
+                  buttons: [
+                    DialogButton(
+                      child: Text(
+                        "OK",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                      color: Color.fromRGBO(0, 179, 134, 1.0),
+                      radius: BorderRadius.circular(0.0),
+                    ),
+                  ],
+                ).show();
               } else {
                 try {
                   final newUser = await _auth.createUserWithEmailAndPassword(
@@ -144,12 +162,48 @@ class _signupState extends State<signup> {
                     print(
                         "An error occured while trying to send email verification");
                     print(e.message);
+                    Alert(
+                      context: context,
+                      style: alertStyle,
+                      type: AlertType.error,
+                      title:
+                          "An error occured while trying to send email verification",
+                      buttons: [
+                        DialogButton(
+                          child: Text(
+                            "OK",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          onPressed: () => Navigator.pop(context),
+                          color: Color.fromRGBO(0, 179, 134, 1.0),
+                          radius: BorderRadius.circular(0.0),
+                        ),
+                      ],
+                    ).show();
                   }
                   if (newUser != null) {
                     Navigator.pushNamed(context, 'firstsign');
                   }
                 } catch (e) {
-                  print(e);
+                  // print(e);
+                  Alert(
+                    context: context,
+                    style: alertStyle,
+                    type: AlertType.error,
+                    title: "Invalid Email or user already exist",
+                    desc: "Enter correct Email",
+                    buttons: [
+                      DialogButton(
+                        child: Text(
+                          "OK",
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                        color: Color.fromRGBO(0, 179, 134, 1.0),
+                        radius: BorderRadius.circular(0.0),
+                      ),
+                    ],
+                  ).show();
                 }
               }
             },

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'constants.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 // ignore: camel_case_types
 class firstsign extends StatefulWidget {
@@ -144,11 +145,11 @@ class _firstsignState extends State<firstsign> {
                       'Type': 'guser',
                     });
                     if (loggedinUser != null) {
-                      if(!loggedinUser.emailVerified){
+                      if (!loggedinUser.emailVerified) {
                         print(loggedinUser.emailVerified);
                         await _auth.signOut();
                         Navigator.pushNamed(context, 'login');
-                      }else{
+                      } else {
                         Navigator.pushNamed(context, 'home');
                       }
                     }
