@@ -194,8 +194,7 @@ class _firstadminState extends State<firstadmin> {
                         context: context,
                         style: alertStyle,
                         type: AlertType.error,
-                        title:
-                            "An error occured while trying to send email verification",
+                        title: '${e.message}',
                         buttons: [
                           DialogButton(
                             child: Text(
@@ -251,8 +250,7 @@ class _firstadminState extends State<firstadmin> {
                       context: context,
                       style: alertStyle,
                       type: AlertType.error,
-                      title: "Invalid Email or user already exist",
-                      desc: "Enter correct Email",
+                      title: '${e.message}',
                       buttons: [
                         DialogButton(
                           child: Text(
