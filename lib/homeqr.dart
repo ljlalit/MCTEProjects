@@ -2,6 +2,7 @@ import 'package:QRhelp/home.dart';
 import 'package:flutter/material.dart';
 import 'QrGenerator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:page_transition/page_transition.dart';
 
 // ignore: camel_case_types
 class homeqr extends StatefulWidget {
@@ -46,7 +47,11 @@ class _homeqrState extends State<homeqr> {
               children: <Widget>[
                 SizedBox(),
                 InkWell(
-                  onTap: () => (Navigator.pushNamed(context, 'home')),
+                  onTap: () => (Navigator.push(
+                    context,
+                    PageTransition(
+                        type: PageTransitionType.topToBottom, child: home()),
+                  )),
                   // Adobe XD layer: '76d5dbd2-d96c-4435-…' (shape)
                   child: Container(
                     width: 86.0,
