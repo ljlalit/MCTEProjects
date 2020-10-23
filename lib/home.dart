@@ -1,8 +1,6 @@
-import 'package:QRhelp/homenav.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
 
 // ignore: camel_case_types
 class home extends StatefulWidget {
@@ -14,6 +12,11 @@ class home extends StatefulWidget {
 class _homeState extends State<home> {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
+
+  void logout(var context) async {
+    await _auth.signOut();
+    Navigator.pushNamed(context, 'login');
+  }
 
   User loggedinUser;
 
@@ -59,60 +62,83 @@ class _homeState extends State<home> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            backgroundColor: const Color(0xffffffff),
+            appBar: AppBar(
+              backgroundColor: Colors.redAccent,
+            ),
+            drawer: Theme(
+              data: Theme.of(context).copyWith(
+                canvasColor: Colors.redAccent,
+              ),
+              child: Drawer(
+                child: ListView(
+                  children: <Widget>[
+                    ListTile(
+                      title: SizedBox(),
+                    ),
+                    ListTile(
+                      onTap: () => {Navigator.pushNamed(context, 'profile')},
+                      title: Text(
+                        'Your Profile',
+                        style: TextStyle(
+                          fontFamily: 'NeueKabel',
+                          fontSize: 32,
+                          color: const Color(0xffffffff),
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Divider(),
+                    ListTile(
+                      onTap: () => ({Navigator.pushNamed(context, 'services')}),
+                      title: Text(
+                        'Your Services',
+                        style: TextStyle(
+                          fontFamily: 'NeueKabel',
+                          fontSize: 32,
+                          color: const Color(0xffffffff),
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Divider(),
+                    ListTile(
+                        onTap: () => ({logout(context)}),
+                        title: SizedBox(
+                          width: 118.0,
+                          child: Text(
+                            'Logout',
+                            style: TextStyle(
+                              fontFamily: 'NeueKabel',
+                              fontSize: 32,
+                              color: const Color(0xffffffff),
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        )),
+                    ListTile(
+                      title: SizedBox(),
+                    ),
+                    ListTile(
+                        title: Container(
+                      width: 300.0,
+                      height: 300.0,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: const AssetImage('assets/Signals (1).png'),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    )),
+                  ],
+                ),
+              ),
+            ),
             body: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   SizedBox(
                     height: 0.1,
                   ),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        SizedBox(),
-                        Container(
-                          child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        type: PageTransitionType.leftToRight,
-                                        child: homenav()));
-                              },
-
-                              // Adobe XD layer: 'baseline_account_ci…' (shape)
-                              child: Container(
-                                width: 68.0,
-                                height: 68.0,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: const AssetImage(
-                                        'assets/baseline_account_circle_black_18dp.png'),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              )),
-                        ),
-                        SizedBox(),
-                        SizedBox(),
-                        SizedBox(),
-                        SizedBox(),
-                        SizedBox(),
-                        SizedBox(),
-                        Container(
-                            width: 70.0,
-                            height: 50.0,
-                            decoration: BoxDecoration(
-                              color: const Color(0xffe53935),
-                              borderRadius: BorderRadius.circular(3.0),
-                              image: DecorationImage(
-                                image: const AssetImage(
-                                    'assets/ADGPI_Indian_Army.svg.png'),
-                                fit: BoxFit.fill,
-                              ),
-                            )),
-                        SizedBox(),
-                      ]),
                   Text.rich(
                     TextSpan(
                       style: TextStyle(
@@ -147,7 +173,7 @@ class _homeState extends State<home> {
                       height: 180.0,
                       // MediaQuery.of(context).copyWith().size.height / 3.5,
                       decoration: BoxDecoration(
-                        color: const Color(0xffe53935),
+                        color: Colors.redAccent,
                       ),
                       child: Column(
                         children: <Widget>[
@@ -157,7 +183,7 @@ class _homeState extends State<home> {
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                 image: const AssetImage(
-                                    'assets/76d5dbd2-d96c-4435-92dc-68cb226fd7a5.png'),
+                                    'assets/baseline_keyboard_arrow_up_black_18dp.png'),
                                 fit: BoxFit.fill,
                               ),
                             ),

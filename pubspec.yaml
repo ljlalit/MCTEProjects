@@ -70,6 +70,7 @@ flutter:
     - assets/76d5dbd2-d96c-4435-92dc-68cb226fd7a5.png
     - assets/Signals (1).png
     - assets/clear_white_192x192.png
+    - assets/baseline_keyboard_arrow_up_black_18dp.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

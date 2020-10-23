@@ -76,19 +76,6 @@ class _profileState extends State<profile> {
               ),
             ],
           ),
-          FlatButton(
-            color: const Color(0xffe53935),
-            child: Text(
-              'Change Photo',
-              style: TextStyle(
-                fontFamily: 'NeueKabel',
-                fontSize: 24,
-                color: const Color(0xffffffff),
-              ),
-              textAlign: TextAlign.center,
-            ),
-            onPressed: () {},
-          ),
           Text(
             'Name: ${name}',
             style: TextStyle(
