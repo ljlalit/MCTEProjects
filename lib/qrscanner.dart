@@ -196,26 +196,31 @@ class _QRViewExampleState extends State<QRViewExample> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         this.qrText = scanData;
-        checktargetuser();
       });
+      checktargetuser();
     });
   }
 
   void checktargetuser() {
-    targetUserDoc = _firestore.collection("users").doc(qrText.toString());
+    targetUserDoc = _firestore.collection("users").doc(qrText);
     targetUserDoc.get().then((value) {
       if (value.exists) {
         targetuserdata = value.data();
-        targetuserservices = targetuserdata['Serviecs'];
+        targetuserservices = targetuserdata['Services'];
         for (int i = 0; i < targetuserservices.length; i++) {
           if (services[0].toString() == targetuserservices[i].toString()) {
+            print(targetuserservices[i].toString());
             found = true;
           }
         }
+        pushnew();
       }
     }).catchError((e) {
       print(e);
     });
+  }
+
+  void pushnew() {
     if (found) {
       Navigator.push(
         context,
@@ -232,13 +237,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                   targetuserid: qrText.toString(),
                 )),
       );
-      controller.pauseCamera();
     }
+    controller.pauseCamera();
   }
-
-  // @override
-  // void dispose() {
-  //   controller.dispose();
-  //   super.dispose();
-  // }
 }
