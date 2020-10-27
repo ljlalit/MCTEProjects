@@ -160,7 +160,7 @@ class _loginState extends State<login> {
                   context: context,
                   style: alertStyle,
                   type: AlertType.error,
-                  title: '${e.message}',
+                  title: 'Invalid Email/Password',
                   buttons: [
                     DialogButton(
                       child: Text(
