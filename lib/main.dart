@@ -1,5 +1,7 @@
 import 'package:QRhelp/adminhome.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:QRhelp/adminservices.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:QRhelp/firstadmin.dart';
 import 'package:QRhelp/firstsign.dart';
 import 'package:QRhelp/home.dart';
@@ -14,16 +16,38 @@ import 'package:QRhelp/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:QRhelp/userservices.dart';
 
+final _auth = FirebaseAuth.instance;
+String initialroute;
+void getCurrentUser() {
+  final user = _auth.currentUser;
+  if (user != null) {
+    initialroute = 'home';
+  } else {
+    initialroute = 'login';
+  }
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  getCurrentUser();
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(initialRoute: 'login', routes: {
+    return MaterialApp(initialRoute: initialroute, routes: {
       'login': (context) => login(),
       'signup': (context) => signup(),
       'home': (context) => home(),

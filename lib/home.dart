@@ -24,7 +24,6 @@ class _homeState extends State<home> {
   @override
   void initState() {
     super.initState();
-    getCurrentUser();
   }
 
   String name;
@@ -32,47 +31,30 @@ class _homeState extends State<home> {
   var docref;
   var data;
 
-  void getCurrentUser() async {
-    try {
-      // ignore: await_only_futures
-      final user = await _auth.currentUser;
-      if (user != null) {
-        loggedinUser = user;
-      }
-    } catch (e) {
-      print(e);
+  Future<Userdata> getCurrentUserData() async {
+    final user = _auth.currentUser;
+    if (user != null) {
+      loggedinUser = user;
     }
-  }
-
-  Future<Userdata> getCurrentUserData() {
     docref = _firestore.collection("users").doc(loggedinUser.uid);
-    docref.get().then((value) {
-      if (value.exists) {
-        data = value.data();
-        Userdata userdata = Userdata(
-            data["Email"],
-            data["Name"],
-            data["Number"],
-            data["Rank"],
-            data["Services"],
-            data["Type"],
-            data["Unit"]);
-        return userdata;
-      }
-    }).catchError((e) {
-      print(e);
-    });
+    data = await docref.get();
+    Userdata userdata = Userdata(data["Email"], data["Name"], data["Number"],
+        data["Rank"], data["Services"], data["Type"], data["Unit"]);
+    return userdata;
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: FutureBuilder<Userdata>(
+        child: FutureBuilder(
       future: getCurrentUserData(),
-      builder: (BuildContext context, AsyncSnapshot<Userdata> snapshot) {
-        if (snapshot.data == null) {
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (!snapshot.hasData) {
           return Container(child: Center(child: Text("Loading...")));
         } else {
+          if (snapshot.data.type == "admin") {
+            Navigator.pushNamed(context, "adminhome");
+          }
           return Container(
               child: Scaffold(
                   appBar: AppBar(
@@ -167,7 +149,7 @@ class _homeState extends State<home> {
                                 text: 'Hello, ',
                               ),
                               TextSpan(
-                                text: '${snapshot.data.name}',
+                                text: snapshot.data.name,
                                 style: TextStyle(
                                   fontFamily: 'NeueKabel',
                                 ),
@@ -234,7 +216,7 @@ class Userdata {
   String rank;
   String type;
   String unit;
-  List<String> services = [];
+  var services = [];
   Userdata(this.email, this.name, this.number, this.rank, this.services,
       this.type, this.unit);
 }
