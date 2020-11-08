@@ -56,16 +56,16 @@ class _userservicesState extends State<userservices> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
+          RedButton(
+            text: 'Refresh',
+            c: Colors.blueAccent,
+            onPressed: () {},
+            width: 200.0,
+            height: 20.0,
+          ),
           Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                RedButton(
-                  text: 'Refresh',
-                  c: Colors.blueAccent,
-                  onPressed: () {},
-                  width: 200.0,
-                  height: 20.0,
-                ),
                 Text(
                   'Your Services',
                   style: TextStyle(
