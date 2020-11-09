@@ -173,7 +173,8 @@ class _signupState extends State<signup> {
                     ).show();
                   }
                   if (newUser != null) {
-                    Navigator.pushNamed(context, 'firstsign');
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, 'firstsign', (route) => false);
                   }
                 } catch (e) {
                   // print(e);
@@ -204,7 +205,7 @@ class _signupState extends State<signup> {
             text: 'Sign Up as Admin',
             c: Colors.redAccent,
             onPressed: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                   context,
                   PageTransition(
                       type: PageTransitionType.fade, child: firstadmin()));
@@ -219,7 +220,7 @@ class _signupState extends State<signup> {
             text: 'Login',
             c: Colors.blueAccent,
             onPressed: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                   context,
                   PageTransition(
                       type: PageTransitionType.leftToRight, child: login()));

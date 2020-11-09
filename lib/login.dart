@@ -185,7 +185,7 @@ class _loginState extends State<login> {
             text: 'SignUp',
             c: Colors.blueAccent,
             onPressed: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                   context,
                   PageTransition(
                       type: PageTransitionType.rightToLeft, child: signup()));

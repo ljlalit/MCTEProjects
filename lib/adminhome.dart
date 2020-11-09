@@ -1,9 +1,15 @@
-import 'package:QRhelp/scannedreg.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:QRhelp/RedButton.dart';
 
 // ignore: camel_case_types
 class adminhome extends StatelessWidget {
+  final _auth = FirebaseAuth.instance;
+  void logout(var context) async {
+    await _auth.signOut();
+    Navigator.pushNamedAndRemoveUntil(context, 'login', (route) => false);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,10 +96,7 @@ class adminhome extends StatelessWidget {
                 height: 20.0,
                 c: Colors.lightBlueAccent,
                 onPressed: () {
-                  Navigator.pushNamed(
-                    context,
-                    'login',
-                  );
+                  logout(context);
                 },
               ),
               SizedBox(),
