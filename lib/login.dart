@@ -146,6 +146,9 @@ class _loginState extends State<login> {
                     } else {
                       _auth.signOut();
                       // Navigator.pushNamed(context, 'login');
+                      setState(() {
+                        showSpinner = false;
+                      });
                       Alert(
                         context: context,
                         style: alertStyle,
@@ -167,6 +170,9 @@ class _loginState extends State<login> {
                     }
                   }
                 } catch (e) {
+                  setState(() {
+                    showSpinner = false;
+                  });
                   // print(e);
                   Alert(
                     context: context,

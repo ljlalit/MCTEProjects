@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'adminhome.dart';
 
 // ignore: camel_case_types
 class home extends StatefulWidget {
@@ -54,18 +55,23 @@ class _homeState extends State<home> {
         future: getCurrentUserData(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
-            setState(() {
-              showSpinner = true;
-            });
+            // setState(() {
+            //   showSpinner = true;
+            // });
             return Container(child: Center(child: Text("Loading...")));
           } else {
             if (snapshot.data.type == "admin") {
               Future.delayed(Duration.zero, () {
                 Navigator.pushNamed(context, "adminhome");
-                showSpinner = false;
+                // setState(() {
+                //   showSpinner = false;
+                // });
               });
-              return null;
+              return Container();
             } else
+              // setState(() {
+              //   showSpinner = false;
+              // });
               return Container(
                   child: Scaffold(
                       appBar: AppBar(
@@ -163,7 +169,10 @@ class _homeState extends State<home> {
                                   TextSpan(
                                     text: snapshot.data.name,
                                     style: TextStyle(
-                                      fontFamily: 'NeueKabel',
+                                      fontFamily: 'Bowlby',
+                                      letterSpacing: 1.5,
+                                      color: Colors.redAccent,
+                                      fontSize: 50.0,
                                     ),
                                   ),
                                 ],
