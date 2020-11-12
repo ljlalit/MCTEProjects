@@ -139,7 +139,8 @@ class _loginState extends State<login> {
                       email: email.trim(), password: password);
                   if (user != null) {
                     if (user.user.emailVerified) {
-                      Navigator.pushNamed(context, 'home');
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          'home', (Route<dynamic> route) => false);
                       setState(() {
                         showSpinner = false;
                       });

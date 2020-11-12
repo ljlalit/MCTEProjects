@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'adminhome.dart';
+import 'package:flutter/scheduler.dart';
 
 // ignore: camel_case_types
 class home extends StatefulWidget {
@@ -58,15 +59,19 @@ class _homeState extends State<home> {
             // setState(() {
             //   showSpinner = true;
             // });
-            return Container(child: Center(child: Text("Loading...")));
+            return Container();
+            //return Container(child: Center(child: Text("Loading...")));
           } else {
             if (snapshot.data.type == "admin") {
-              Future.delayed(Duration.zero, () {
-                Navigator.pushNamed(context, "adminhome");
-                // setState(() {
-                //   showSpinner = false;
-                // });
+              // Future.delayed(Duration.zero, () {
+              SchedulerBinding.instance.addPostFrameCallback((_) {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    "adminhome", (Route<dynamic> route) => false);
               });
+              // setState(() {
+              //   showSpinner = false;
+              // });
+              // });
               return Container();
             } else
               // setState(() {
@@ -182,10 +187,8 @@ class _homeState extends State<home> {
                             SizedBox(),
                             InkWell(
                               onTap: () => ({
-                                Navigator.pushNamed(
-                                  context,
-                                  'homeqr',
-                                ),
+                                Navigator.pushNamedAndRemoveUntil(context,
+                                    'homeqr', (Route<dynamic> route) => false),
                               }),
                               child: Container(
                                 width: MediaQuery.of(context)
