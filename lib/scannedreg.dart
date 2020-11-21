@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:QRhelp/RedButton.dart';
 
 // ignore: camel_case_types
 class scannedreg extends StatefulWidget {
@@ -126,6 +127,14 @@ class _scannedregState extends State<scannedreg> {
                 textAlign: TextAlign.center,
               ),
             ),
+            RedButton(
+                text: 'Unregister',
+                c: Colors.redAccent,
+                height: 20.0,
+                width: 150.0,
+                onPressed: () {
+                  Navigator.pushNamed(context, 'adminhome');
+                }),
           ])
         ],
       ),
