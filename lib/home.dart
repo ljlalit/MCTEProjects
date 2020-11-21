@@ -2,6 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'adminhome.dart';
+import 'package:flutter/scheduler.dart';
 
 // ignore: camel_case_types
 class home extends StatefulWidget {
@@ -11,12 +14,13 @@ class home extends StatefulWidget {
 
 // ignore: camel_case_types
 class _homeState extends State<home> {
+  bool showSpinner = false;
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
 
   void logout(var context) async {
     await _auth.signOut();
-    Navigator.pushNamed(context, 'login');
+    Navigator.pushNamedAndRemoveUntil(context, 'login', (route) => false);
   }
 
   User loggedinUser;
@@ -45,65 +49,54 @@ class _homeState extends State<home> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: FutureBuilder(
-      future: getCurrentUserData(),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (!snapshot.hasData) {
-          return Container(child: Center(child: Text("Loading...")));
-        } else {
-          if (snapshot.data.type == "admin") {
-            Navigator.pushNamed(context, "adminhome");
-          }
-          return Container(
-              child: Scaffold(
-                  appBar: AppBar(
-                    backgroundColor: Colors.redAccent,
-                  ),
-                  drawer: Theme(
-                    data: Theme.of(context).copyWith(
-                      canvasColor: Colors.redAccent,
-                    ),
-                    child: Drawer(
-                      child: ListView(
-                        children: <Widget>[
-                          ListTile(
-                            title: SizedBox(),
-                          ),
-                          ListTile(
-                            onTap: () =>
-                                {Navigator.pushNamed(context, 'profile')},
-                            title: Text(
-                              'Your Profile',
-                              style: TextStyle(
-                                fontFamily: 'NeueKabel',
-                                fontSize: 32,
-                                color: const Color(0xffffffff),
+    return ModalProgressHUD(
+      inAsyncCall: showSpinner,
+      child: Scaffold(
+          body: FutureBuilder(
+        future: getCurrentUserData(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (!snapshot.hasData) {
+            // setState(() {
+            //   showSpinner = true;
+            // });
+            return Container();
+            //return Container(child: Center(child: Text("Loading...")));
+          } else {
+            if (snapshot.data.type == "admin") {
+              // Future.delayed(Duration.zero, () {
+              SchedulerBinding.instance.addPostFrameCallback((_) {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    "adminhome", (Route<dynamic> route) => false);
+              });
+              // setState(() {
+              //   showSpinner = false;
+              // });
+              // });
+              return Container();
+            } else
+              // setState(() {
+              //   showSpinner = false;
+              // });
+              return Container(
+                  child: Scaffold(
+                      appBar: AppBar(
+                        backgroundColor: Colors.redAccent,
+                      ),
+                      drawer: Theme(
+                        data: Theme.of(context).copyWith(
+                          canvasColor: Colors.redAccent,
+                        ),
+                        child: Drawer(
+                          child: ListView(
+                            children: <Widget>[
+                              ListTile(
+                                title: SizedBox(),
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          Divider(),
-                          ListTile(
-                            onTap: () =>
-                                ({Navigator.pushNamed(context, 'services')}),
-                            title: Text(
-                              'Your Services',
-                              style: TextStyle(
-                                fontFamily: 'NeueKabel',
-                                fontSize: 32,
-                                color: const Color(0xffffffff),
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          Divider(),
-                          ListTile(
-                              onTap: () => ({logout(context)}),
-                              title: SizedBox(
-                                width: 118.0,
-                                child: Text(
-                                  'Logout',
+                              ListTile(
+                                onTap: () =>
+                                    {Navigator.pushNamed(context, 'profile')},
+                                title: Text(
+                                  'Your Profile',
                                   style: TextStyle(
                                     fontFamily: 'NeueKabel',
                                     fontSize: 32,
@@ -111,101 +104,136 @@ class _homeState extends State<home> {
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
-                              )),
-                          ListTile(
-                            title: SizedBox(),
-                          ),
-                          ListTile(
-                              title: Container(
-                            width: 300.0,
-                            height: 300.0,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image:
-                                    const AssetImage('assets/Signals (1).png'),
-                                fit: BoxFit.fill,
                               ),
-                            ),
-                          )),
-                        ],
-                      ),
-                    ),
-                  ),
-                  body: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 0.1,
-                        ),
-                        Text.rich(
-                          TextSpan(
-                            style: TextStyle(
-                              fontFamily: 'NeueKabel',
-                              fontSize: 48,
-                              color: const Color(0xff000000),
-                            ),
-                            children: [
-                              TextSpan(
-                                text: 'Hello, ',
-                              ),
-                              TextSpan(
-                                text: snapshot.data.name,
-                                style: TextStyle(
-                                  fontFamily: 'NeueKabel',
+                              Divider(),
+                              ListTile(
+                                onTap: () => ({
+                                  Navigator.pushNamed(context, 'services')
+                                }),
+                                title: Text(
+                                  'Your Services',
+                                  style: TextStyle(
+                                    fontFamily: 'NeueKabel',
+                                    fontSize: 32,
+                                    color: const Color(0xffffffff),
+                                  ),
+                                  textAlign: TextAlign.center,
                                 ),
                               ),
+                              Divider(),
+                              ListTile(
+                                  onTap: () => ({logout(context)}),
+                                  title: SizedBox(
+                                    width: 118.0,
+                                    child: Text(
+                                      'Logout',
+                                      style: TextStyle(
+                                        fontFamily: 'NeueKabel',
+                                        fontSize: 32,
+                                        color: const Color(0xffffffff),
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  )),
+                              ListTile(
+                                title: SizedBox(),
+                              ),
+                              ListTile(
+                                  title: Container(
+                                width: 300.0,
+                                height: 300.0,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: const AssetImage(
+                                        'assets/Signals (1).png'),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              )),
                             ],
                           ),
-                          textAlign: TextAlign.left,
                         ),
-                        SizedBox(),
-                        InkWell(
-                          onTap: () => ({
-                            Navigator.pushNamed(
-                              context,
-                              'homeqr',
+                      ),
+                      body: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            SizedBox(
+                              height: 0.1,
                             ),
-                          }),
-                          child: Container(
-                            width: MediaQuery.of(context).copyWith().size.width,
-                            height: 180.0,
-                            // MediaQuery.of(context).copyWith().size.height / 3.5,
-                            decoration: BoxDecoration(
-                              color: Colors.redAccent,
-                            ),
-                            child: Column(
-                              children: <Widget>[
-                                Container(
-                                  width: 86.0,
-                                  height: 86.0,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: const AssetImage(
-                                          'assets/baseline_keyboard_arrow_up_black_18dp.png'),
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
+                            Text.rich(
+                              TextSpan(
+                                style: TextStyle(
+                                  fontFamily: 'NeueKabel',
+                                  fontSize: 48,
+                                  color: const Color(0xff000000),
                                 ),
-                                Container(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    'Your QR',
+                                children: [
+                                  TextSpan(
+                                    text: 'Hello, ',
+                                  ),
+                                  TextSpan(
+                                    text: snapshot.data.name,
                                     style: TextStyle(
-                                      fontFamily: 'NeueKabel',
-                                      fontSize: 48,
-                                      color: const Color(0xffffffff),
+                                      fontFamily: 'Bowlby',
+                                      letterSpacing: 1.5,
+                                      color: Colors.redAccent,
+                                      fontSize: 50.0,
                                     ),
-                                    textAlign: TextAlign.left,
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
+                              textAlign: TextAlign.left,
                             ),
-                          ),
-                        ),
-                      ])));
-        }
-      },
-    ));
+                            SizedBox(),
+                            InkWell(
+                              onTap: () => ({
+                                Navigator.pushNamedAndRemoveUntil(context,
+                                    'homeqr', (Route<dynamic> route) => false),
+                              }),
+                              child: Container(
+                                width: MediaQuery.of(context)
+                                    .copyWith()
+                                    .size
+                                    .width,
+                                height: 180.0,
+                                // MediaQuery.of(context).copyWith().size.height / 3.5,
+                                decoration: BoxDecoration(
+                                  color: Colors.redAccent,
+                                ),
+                                child: Column(
+                                  children: <Widget>[
+                                    Container(
+                                      width: 86.0,
+                                      height: 86.0,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: const AssetImage(
+                                              'assets/baseline_keyboard_arrow_up_black_18dp.png'),
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'Your QR',
+                                        style: TextStyle(
+                                          fontFamily: 'NeueKabel',
+                                          fontSize: 48,
+                                          color: const Color(0xffffffff),
+                                        ),
+                                        textAlign: TextAlign.left,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ])));
+          }
+        },
+      )),
+    );
   }
 }
 

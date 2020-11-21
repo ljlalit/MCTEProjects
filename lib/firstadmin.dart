@@ -218,6 +218,10 @@ class _firstadminState extends State<firstadmin> {
                           'Email': newUser.user.email,
                           'Services': [dropdownValue.toString()],
                           'Type': 'admin',
+                          'Name': 'Not Defined',
+                          'Rank': 'Not defined',
+                          'Unit': 'Not Defined',
+                          'Number': 'Not Defined',
                         });
                       } catch (e) {
                         print(e);
