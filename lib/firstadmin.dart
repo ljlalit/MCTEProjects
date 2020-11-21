@@ -138,12 +138,8 @@ class _firstadminState extends State<firstadmin> {
                 dropdownValue = newValue;
               });
             },
-            items: <String>[
-              'Swimming Pool',
-              'Movie Hall',
-              'DSOI',
-              'Sports Centre'
-            ].map<DropdownMenuItem<String>>((String value) {
+            items: <String>['swimmingpool', 'moviehall', 'dsoi', 'sportscentre']
+                .map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
                 child: Text(value),

@@ -94,7 +94,7 @@ class _adminservicesState extends State<adminservices> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Text(
-                  'Users re',
+                  'Users registered',
                   style: TextStyle(
                     fontFamily: 'Segoe UI',
                     fontSize: 40,
