@@ -83,13 +83,13 @@ class _adminservicesState extends State<adminservices> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          RedButton(
-            text: 'Refresh',
-            c: Colors.blueAccent,
-            onPressed: () {},
-            width: 200.0,
-            height: 20.0,
-          ),
+          // RedButton(
+          //   text: 'Refresh',
+          //   c: Colors.blueAccent,
+          //   onPressed: () {},
+          //   width: 200.0,
+          //   height: 20.0,
+          // ),
           Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
