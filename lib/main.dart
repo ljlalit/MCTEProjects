@@ -60,6 +60,7 @@ class _MyAppState extends State<MyApp> {
       'qrscanner': (context) => QRViewExample(),
       'firstadmin': (context) => firstadmin(),
       'adminservices': (context) => adminservices(),
+      'infostream': (context) => infostream(),
       'info': (context) => Info(),
     });
   }

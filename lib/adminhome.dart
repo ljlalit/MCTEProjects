@@ -79,6 +79,18 @@ class adminhome extends StatelessWidget {
                 },
               ),
               RedButton(
+                text: 'Update',
+                width: 150.0,
+                height: 20.0,
+                c: Colors.redAccent,
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    'infostream',
+                  );
+                },
+              ),
+              RedButton(
                 text: 'Show All',
                 width: 150.0,
                 height: 20.0,
