@@ -1,4 +1,5 @@
 import 'package:QRhelp/adminhome.dart';
+import 'package:QRhelp/info.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:QRhelp/adminservices.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -59,6 +60,7 @@ class _MyAppState extends State<MyApp> {
       'qrscanner': (context) => QRViewExample(),
       'firstadmin': (context) => firstadmin(),
       'adminservices': (context) => adminservices(),
+      'info': (context) => Info(),
     });
   }
 }

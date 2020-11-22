@@ -212,6 +212,14 @@ class _loginState extends State<login> {
               width: 200.0,
               height: 20.0,
             ),
+            FlatButton(
+              onPressed: () {
+                Navigator.pushNamed(context, 'info');
+              },
+              child: Text(
+                'Info',
+              ),
+            ),
           ],
         ),
       ),
