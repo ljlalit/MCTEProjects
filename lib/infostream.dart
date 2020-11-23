@@ -15,17 +15,28 @@ class infostream extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Expanded(
               child: BuildTextField(
                 kType: TextInputType.name,
                 otext: false,
                 ltext: 'Name',
-                onChanged: (value) {
-                  name = value;
-                },
+                onChanged: (value) {},
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                RedButton(
+                    text: 'Update', c: Colors.blueAccent, onPressed: () {}),
+                RedButton(
+                  text: 'Back',
+                  c: Colors.blueAccent,
+                  onPressed: () {},
+                )
+              ],
+            )
           ],
         ),
       ),
