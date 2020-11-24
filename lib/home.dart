@@ -65,8 +65,13 @@ class _homeState extends State<home> {
             if (snapshot.data.type == "admin") {
               // Future.delayed(Duration.zero, () {
               SchedulerBinding.instance.addPostFrameCallback((_) {
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    "adminhome", (Route<dynamic> route) => false);
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => adminhome(
+                              service: snapshot.data.services[0].toString(),
+                            )),
+                    (route) => false);
               });
               // setState(() {
               //   showSpinner = false;

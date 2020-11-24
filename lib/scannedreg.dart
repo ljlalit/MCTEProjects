@@ -85,7 +85,7 @@ class _scannedregState extends State<scannedreg> {
                 ),
                 children: [
                   TextSpan(
-                    text: '${targetusername}',
+                    text: '${targetusername} \n',
                     style: TextStyle(
                       fontFamily: 'NeueKabel',
                     ),

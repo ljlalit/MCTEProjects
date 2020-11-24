@@ -1,13 +1,29 @@
+import 'package:QRhelp/infostream.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:QRhelp/RedButton.dart';
 
 // ignore: camel_case_types
-class adminhome extends StatelessWidget {
+class adminhome extends StatefulWidget {
+  String service;
+  adminhome({this.service});
+  @override
+  _adminhomeState createState() => _adminhomeState();
+}
+
+class _adminhomeState extends State<adminhome> {
   final _auth = FirebaseAuth.instance;
+
   void logout(var context) async {
     await _auth.signOut();
     Navigator.pushNamedAndRemoveUntil(context, 'login', (route) => false);
+  }
+
+  String serviceName;
+  @override
+  void initState() {
+    super.initState();
+    serviceName = widget.service;
   }
 
   @override
@@ -40,10 +56,10 @@ class adminhome extends StatelessWidget {
               ),
               children: [
                 TextSpan(
-                  text: 'Welcome, ',
+                  text: 'Welcome,\n',
                 ),
                 TextSpan(
-                  text: 'Admin',
+                  text: ' ${serviceName} Admin',
                   style: TextStyle(
                     fontFamily: 'NeueKabel',
                   ),
@@ -84,9 +100,12 @@ class adminhome extends StatelessWidget {
                 height: 20.0,
                 c: Colors.redAccent,
                 onPressed: () {
-                  Navigator.pushNamed(
+                  Navigator.push(
                     context,
-                    'infostream',
+                    MaterialPageRoute(
+                        builder: (context) => infostream(
+                              service: serviceName,
+                            )),
                   );
                 },
               ),

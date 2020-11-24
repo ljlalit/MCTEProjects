@@ -7,7 +7,22 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'buildTextField.dart';
 
 // ignore: camel_case_types
-class infostream extends StatelessWidget {
+class infostream extends StatefulWidget {
+  final String service;
+  infostream({this.service});
+  @override
+  _infostreamState createState() => _infostreamState();
+}
+
+class _infostreamState extends State<infostream> {
+  final _firestore = FirebaseFirestore.instance;
+  String serviceName;
+  void initState() {
+    super.initState();
+    serviceName = widget.service;
+  }
+
+  String description;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -21,19 +36,39 @@ class infostream extends StatelessWidget {
               child: BuildTextField(
                 kType: TextInputType.name,
                 otext: false,
-                ltext: 'Name',
-                onChanged: (value) {},
+                ltext: '${serviceName} description',
+                onChanged: (value) {
+                  description = value;
+                },
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 RedButton(
-                    text: 'Update', c: Colors.blueAccent, onPressed: () {}),
+                    text: 'Update',
+                    c: Colors.blueAccent,
+                    onPressed: () {
+                      try {
+                        _firestore
+                            .collection('servicedescription')
+                            .doc(serviceName.toString())
+                            .update(
+                          {
+                            'description': description,
+                          },
+                        );
+                      } catch (e) {
+                        print(e);
+                        print('dfddff\nzsfx');
+                      }
+                    }),
                 RedButton(
                   text: 'Back',
                   c: Colors.blueAccent,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 )
               ],
             )

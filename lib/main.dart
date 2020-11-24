@@ -17,6 +17,8 @@ import 'package:QRhelp/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:QRhelp/userservices.dart';
 
+import 'infostream.dart';
+
 final _auth = FirebaseAuth.instance;
 String initialroute;
 void getCurrentUser() {
