@@ -59,16 +59,27 @@ class _infostreamState extends State<infostream> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
+            SizedBox(
+              height: 30,
+            ),
             Expanded(
-              child: BuildTextField(
-                kType: TextInputType.name,
-                otext: false,
-                ltext: '${serviceName} description',
+                child: Container(
+              width: 270,
+              child: TextFormField(
+                keyboardType: TextInputType.multiline,
+                maxLines: 24,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderSide:
+                        const BorderSide(width: 7.0, color: Colors.redAccent),
+                  ),
+                  labelText: 'Input Information',
+                ),
                 onChanged: (value) {
                   description = value;
                 },
               ),
-            ),
+            )),
             Center(
               child: RedButton(
                   text: 'Update',
@@ -88,7 +99,8 @@ class _infostreamState extends State<infostream> {
                       print('dfddff\nzsfx');
                     }
                   }),
-            )
+            ),
+            SizedBox(),
           ],
         ),
       ),
