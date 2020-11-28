@@ -10,7 +10,7 @@ import 'buildTextField.dart';
 class infostream extends StatefulWidget {
   final String serviceN;
 
-  infostream ({ Key key, this.serviceN }): super(key: key);
+  infostream({Key key, this.serviceN}) : super(key: key);
   @override
   _infostreamState createState() => _infostreamState();
 }

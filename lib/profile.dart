@@ -119,7 +119,7 @@ class _profileState extends State<profile> {
               height: 20.0,
               width: 150.0,
               onPressed: () {
-                Navigator.pushNamed(context, 'adminhome');
+                Navigator.pop(context);
               }),
         ],
       ),
