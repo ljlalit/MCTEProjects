@@ -40,7 +40,6 @@ class _InfoState extends State<Info> {
 
     });
     });
-    print("jai hanuman");
   }
 
   @override

@@ -8,6 +8,9 @@ import 'buildTextField.dart';
 
 // ignore: camel_case_types
 class infostream extends StatefulWidget {
+  final String serviceN;
+
+  infostream ({ Key key, this.serviceN }): super(key: key);
   @override
   _infostreamState createState() => _infostreamState();
 }
@@ -21,7 +24,8 @@ class _infostreamState extends State<infostream> {
   String serviceName;
   void initState() {
     super.initState();
-    getCurrentUser();
+    serviceName = widget.serviceN;
+    // getCurrentUser();
   }
 
   void getCurrentUser() async {
