@@ -21,15 +21,18 @@ class _scannedregState extends State<scannedreg> {
   void initState() {
     super.initState();
     id = widget.targetuserid;
+    getTargetUser();
   }
 
   void getTargetUser() {
+    print(id.toString());
     targetuserdocref = _firestore.collection("users").doc(id);
     targetuserdocref.get().then((value) {
       if (value.exists) {
         targetuserdata = value.data();
         setState(() {
           this.targetusername = targetuserdata["Name"];
+          print(targetusername);
         });
       }
     }).catchError((e) {

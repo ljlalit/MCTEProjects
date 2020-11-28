@@ -9,18 +9,16 @@ class home2 extends StatefulWidget {
 }
 
 class _home2State extends State<home2> {
-  String serviceName;
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
   User loggedinUser;
   var docref;
   var data;
-
+  String serviceName = '';
   @override
   void initState() {
     super.initState();
     getCurrentUser();
-    // serviceName = data["Services"];
   }
 
   void logout(var context) async {
@@ -51,6 +49,7 @@ class _home2State extends State<home2> {
 
   @override
   Widget build(BuildContext context) {
+    //Rprint(serviceName);
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[

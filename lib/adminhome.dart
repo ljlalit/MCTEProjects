@@ -20,16 +20,16 @@ class adminhome extends StatefulWidget {
 class _adminhomeState extends State<adminhome> {
   final _auth = FirebaseAuth.instance;
   final pageList = [];
+  static String serviceName;
 
-  String serviceName;
   @override
   void initState() {
     super.initState();
-    serviceName = widget.service;
+    serviceName = widget.service.toString();
   }
 
   int selectedPage = 2;
-  final pageList2 = [
+  var pageList2 = [
     QRViewExample(),
     infostream(),
     home2(),

@@ -209,7 +209,7 @@ class _QRViewExampleState extends State<QRViewExample> {
         targetuserservices = targetuserdata['Services'];
         for (int i = 0; i < targetuserservices.length; i++) {
           if (services[0].toString() == targetuserservices[i].toString()) {
-            print(targetuserservices[i].toString());
+            //print(targetuserservices[i].toString());
             found = true;
           }
         }
@@ -226,7 +226,7 @@ class _QRViewExampleState extends State<QRViewExample> {
         context,
         MaterialPageRoute(
             builder: (context) => scannedreg(
-                  targetuserid: qrText.toString(),
+                  targetuserid: qrText,
                 )),
       );
     } else {
@@ -234,7 +234,7 @@ class _QRViewExampleState extends State<QRViewExample> {
         context,
         MaterialPageRoute(
             builder: (context) => scannedunreg(
-                  targetuserid: qrText.toString(),
+                  targetuserid: qrText,
                 )),
       );
     }
