@@ -213,7 +213,7 @@ class _homeState extends State<home> {
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
                                           image: const AssetImage(
-                                              'assets/baseline_keyboard_arrow_up_black_18dp.png'),
+                                              'assets/baseline_keyboard_arrow_up_white_48dp.png'),
                                           fit: BoxFit.fill,
                                         ),
                                       ),
