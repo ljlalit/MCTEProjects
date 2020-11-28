@@ -169,6 +169,10 @@ class _loginState extends State<login> {
                         ],
                       ).show();
                     }
+                  } else {
+                    setState(() {
+                      showSpinner = false;
+                    });
                   }
                 } catch (e) {
                   setState(() {
@@ -212,14 +216,16 @@ class _loginState extends State<login> {
               width: 200.0,
               height: 20.0,
             ),
-            FlatButton(
-              onPressed: () {
-                Navigator.pushNamed(context, 'info');
-              },
-              child: Text(
-                'Info',
-              ),
-            ),
+
+            ///Uncomment the following code to test info.dart
+            // FlatButton(
+            //   onPressed: () {
+            //     Navigator.pushNamed(context, 'info');
+            //   },
+            //   child: Text(
+            //     'Info',
+            //   ),
+            // ),
           ],
         ),
       ),
