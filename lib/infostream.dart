@@ -65,35 +65,25 @@ class _infostreamState extends State<infostream> {
                 },
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                RedButton(
-                    text: 'Update',
-                    c: Colors.blueAccent,
-                    onPressed: () {
-                      try {
-                        _firestore
-                            .collection('servicedescription')
-                            .doc(serviceName.toString())
-                            .update(
-                          {
-                            'description': description,
-                          },
-                        );
-                      } catch (e) {
-                        print(e);
-                        print('dfddff\nzsfx');
-                      }
-                    }),
-                RedButton(
-                  text: 'Back',
+            Center(
+              child: RedButton(
+                  text: 'Update',
                   c: Colors.blueAccent,
                   onPressed: () {
-                    Navigator.pop(context);
-                  },
-                )
-              ],
+                    try {
+                      _firestore
+                          .collection('servicedescription')
+                          .doc(serviceName.toString())
+                          .update(
+                        {
+                          'description': description,
+                        },
+                      );
+                    } catch (e) {
+                      print(e);
+                      print('dfddff\nzsfx');
+                    }
+                  }),
             )
           ],
         ),
