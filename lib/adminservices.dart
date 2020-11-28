@@ -105,14 +105,24 @@ class _adminservicesState extends State<adminservices> {
               ]),
           for (int i = 0; i < servicesarrlen; i++)
             if (servicesarrlen != 0)
-              Text(
-                '${servicesarr[i]}',
-                style: TextStyle(
-                  fontFamily: 'Segoe UI',
-                  fontSize: 34,
-                  color: const Color(0xff090909),
-                ),
-                textAlign: TextAlign.left,
+              Row(
+                children: [
+                  Text(
+                    '${servicesarr[i]}',
+                    style: TextStyle(
+                      fontFamily: 'Segoe UI',
+                      fontSize: 34,
+                      color: const Color(0xff090909),
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                  RedButton(
+                      text: 'Unregister',
+                      c: Colors.redAccent,
+                      height: 20.0,
+                      width: 150.0,
+                      onPressed: () {}),
+                ],
               ),
 
           //Jo bhi changes krne ho krdiyo

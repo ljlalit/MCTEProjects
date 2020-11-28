@@ -130,14 +130,6 @@ class _scannedregState extends State<scannedreg> {
                 textAlign: TextAlign.center,
               ),
             ),
-            RedButton(
-                text: 'Unregister',
-                c: Colors.redAccent,
-                height: 20.0,
-                width: 150.0,
-                onPressed: () {
-                  Navigator.pushNamed(context, 'adminhome');
-                }),
           ])
         ],
       ),
