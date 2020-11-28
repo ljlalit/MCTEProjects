@@ -8,18 +8,41 @@ import 'buildTextField.dart';
 
 // ignore: camel_case_types
 class infostream extends StatefulWidget {
-  final String service;
-  infostream({this.service});
   @override
   _infostreamState createState() => _infostreamState();
 }
 
 class _infostreamState extends State<infostream> {
   final _firestore = FirebaseFirestore.instance;
+  final _auth = FirebaseAuth.instance;
+  User loggedinUser;
+  var docref;
+  var data;
   String serviceName;
   void initState() {
     super.initState();
-    serviceName = widget.service;
+    getCurrentUser();
+  }
+
+  void getCurrentUser() async {
+    try {
+      // ignore: await_only_futures
+      final user = await _auth.currentUser;
+      if (user != null) {
+        loggedinUser = user;
+        docref = _firestore.collection("users").doc(loggedinUser.uid);
+        docref.get().then((value) {
+          if (value.exists) {
+            data = value.data();
+            setState(() {
+              serviceName = data["Services"][0];
+            });
+          }
+        });
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   String description;
