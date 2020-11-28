@@ -8,6 +8,9 @@ import 'buildTextField.dart';
 
 // ignore: camel_case_types
 class infostream extends StatefulWidget {
+  final String serviceN;
+
+  infostream({Key key, this.serviceN}) : super(key: key);
   @override
   _infostreamState createState() => _infostreamState();
 }
@@ -21,7 +24,9 @@ class _infostreamState extends State<infostream> {
   String serviceName;
   void initState() {
     super.initState();
-    getCurrentUser();
+    serviceName = widget.serviceN;
+    // getCurrentUser();
+    getDescription();
   }
 
   void getCurrentUser() async {
@@ -45,6 +50,21 @@ class _infostreamState extends State<infostream> {
     }
   }
 
+  void getDescription() async {
+    docref =
+        _firestore.collection('servicedescription').doc(serviceName.toString());
+    docref.get().then((value) {
+      if (value.exists) {
+        data = value.data();
+        setState(() {
+          desc = data["description"];
+          print(desc);
+        });
+      }
+    });
+  }
+
+  String desc = '';
   String description;
   @override
   Widget build(BuildContext context) {
@@ -55,46 +75,49 @@ class _infostreamState extends State<infostream> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
+            SizedBox(
+              height: 30,
+            ),
             Expanded(
-              child: BuildTextField(
-                kType: TextInputType.name,
-                otext: false,
-                ltext: '${serviceName} description',
+                child: Container(
+              width: 270,
+              child: TextFormField(
+                keyboardType: TextInputType.multiline,
+                maxLines: 24,
+                initialValue: "${desc.toString()}",
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderSide:
+                        const BorderSide(width: 7.0, color: Colors.redAccent),
+                  ),
+                  labelText: '$serviceName description',
+                ),
                 onChanged: (value) {
                   description = value;
                 },
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                RedButton(
-                    text: 'Update',
-                    c: Colors.blueAccent,
-                    onPressed: () {
-                      try {
-                        _firestore
-                            .collection('servicedescription')
-                            .doc(serviceName.toString())
-                            .update(
-                          {
-                            'description': description,
-                          },
-                        );
-                      } catch (e) {
-                        print(e);
-                        print('dfddff\nzsfx');
-                      }
-                    }),
-                RedButton(
-                  text: 'Back',
+            )),
+            Center(
+              child: RedButton(
+                  text: 'Update',
                   c: Colors.blueAccent,
                   onPressed: () {
-                    Navigator.pop(context);
-                  },
-                )
-              ],
-            )
+                    try {
+                      _firestore
+                          .collection('servicedescription')
+                          .doc(serviceName.toString())
+                          .update(
+                        {
+                          'description': description,
+                        },
+                      );
+                    } catch (e) {
+                      print(e);
+                      print('dfddff\nzsfx');
+                    }
+                  }),
+            ),
+            SizedBox(),
           ],
         ),
       ),

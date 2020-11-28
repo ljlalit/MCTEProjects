@@ -4,6 +4,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class home2 extends StatefulWidget {
+  final String serviceN;
+
+  home2 ({ Key key, this.serviceN }): super(key: key);
+
   @override
   _home2State createState() => _home2State();
 }
@@ -18,7 +22,8 @@ class _home2State extends State<home2> {
   @override
   void initState() {
     super.initState();
-    getCurrentUser();
+    serviceName = widget.serviceN;
+    // getCurrentUser();
   }
 
   void logout(var context) async {
@@ -99,7 +104,7 @@ class _home2State extends State<home2> {
                 text: 'Welcome,\n',
               ),
               TextSpan(
-                text: ' $serviceName Admin',
+                text: ' ${serviceName} Admin',
                 style: TextStyle(
                   fontFamily: 'NeueKabel',
                 ),

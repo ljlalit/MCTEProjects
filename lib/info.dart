@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Info extends StatefulWidget {
   @override
@@ -6,6 +7,41 @@ class Info extends StatefulWidget {
 }
 
 class _InfoState extends State<Info> {
+  final _firestore = FirebaseFirestore.instance;
+  var docref;
+  var data;
+  String dsoi = "Loading...";
+  String swimpool = "Loading...";
+  String movie = "Loading...";
+  String sports = "Loading...";
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+  
+  void getData() {
+    docref = _firestore.collection("servicedescription");
+    docref.getDocuments().then((querySnapshot){
+    querySnapshot.documents.forEach((doc){
+
+      if(doc.id == "dsoi"){
+        setState(() { dsoi = doc.get('description'); });
+      } else if(doc.id == "swimmingpool"){
+        setState(() {swimpool = doc.get('description'); });
+        
+      } else if(doc.id == "sportscenter"){
+        setState(() { sports = doc.get('description'); });
+        
+      } else if(doc.id == "moviehall"){
+        setState(() { movie = doc.get('description'); });
+        
+      }
+
+    });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -30,33 +66,25 @@ class _InfoState extends State<Info> {
         ),
         body: TabBarView(
           children: [
-            Expanded(
-              child: Column(
-                children: [
-                  Text('DSOI info.'),
-                ],
-              ),
+            Column(
+              children: [
+                Text(dsoi),
+              ],
             ),
-            Expanded(
-              child: Column(
-                children: [
-                  Text('Swimming Pool info.'),
-                ],
-              ),
+            Column(
+              children: [
+                Text(swimpool),
+              ],
             ),
-            Expanded(
-              child: Column(
-                children: [
-                  Text('Movie hall info.'),
-                ],
-              ),
+            Column(
+              children: [
+                Text(movie),
+              ],
             ),
-            Expanded(
-              child: Column(
-                children: [
-                  Text('Sports centre info.'),
-                ],
-              ),
+            Column(
+              children: [
+                Text(sports),
+              ],
             ),
           ],
         ),

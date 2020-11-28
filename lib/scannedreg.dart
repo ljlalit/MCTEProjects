@@ -115,21 +115,29 @@ class _scannedregState extends State<scannedreg> {
             SizedBox(
               width: 10.0,
             ),
-            FlatButton(
-              color: const Color(0xffe53935),
-              onPressed: () {
-                Navigator.pushNamed(context, 'adminhome');
-              },
-              child: Text(
-                'Back',
-                style: TextStyle(
-                  fontFamily: 'NeueKabel',
-                  fontSize: 29,
-                  color: const Color(0xffffffff),
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
+            // FlatButton(
+            //   color: const Color(0xffe53935),
+            //   onPressed: () {
+            //     Navigator.pushNamed(context, 'adminhome');
+            //   },
+            //   child: Text(
+            //     'Back',
+            //     style: TextStyle(
+            //       fontFamily: 'NeueKabel',
+            //       fontSize: 29,
+            //       color: const Color(0xffffffff),
+            //     ),
+            //     textAlign: TextAlign.center,
+            //   ),
+            // ),
+            RedButton(
+                text: 'Back',
+                c: Colors.redAccent,
+                height: 20.0,
+                width: 150.0,
+                onPressed: () {
+                  Navigator.pushNamed(context, 'adminhome');
+                }),
           ])
         ],
       ),

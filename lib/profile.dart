@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:QRhelp/RedButton.dart';
 
 // ignore: camel_case_types
 class profile extends StatefulWidget {
+  final Userdata userData;
+
+  profile({ Key key, this.userData }): super(key: key);
   @override
   _profileState createState() => _profileState();
 }
@@ -12,21 +16,20 @@ class _profileState extends State<profile> {
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   User loggedinUser;
-
-  @override
-  void initState() {
-    super.initState();
-    getCurrentUser();
-  }
-
-//   var getOptions = {
-//     source: 'cache'
-// };
   var data;
   String name = 'loading';
   String number = 'loading';
   String rank = 'loading';
   String unit = 'loading';
+  @override
+  void initState() {
+    super.initState();
+    // getCurrentUser();
+  }
+
+//   var getOptions = {
+//     source: 'cache'
+// };
   var docref;
   void getCurrentUser() async {
     try {
@@ -112,23 +115,28 @@ class _profileState extends State<profile> {
             ),
             textAlign: TextAlign.left,
           ),
-          FlatButton(
-            color: const Color(0xffe53935),
-            child: Text(
-              'Back',
-              style: TextStyle(
-                fontFamily: 'NeueKabel',
-                fontSize: 24,
-                color: const Color(0xffffffff),
-              ),
-              textAlign: TextAlign.center,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
+          RedButton(
+              text: 'Back',
+              c: Colors.redAccent,
+              height: 20.0,
+              width: 150.0,
+              onPressed: () {
+                Navigator.pop(context);
+              }),
         ],
       ),
     );
   }
+}
+
+class Userdata {
+  String email;
+  String name;
+  String number;
+  String rank;
+  String type;
+  String unit;
+  var services = [];
+  Userdata(this.email, this.name, this.number, this.rank, this.services,
+      this.type, this.unit);
 }

@@ -21,21 +21,24 @@ class _adminhomeState extends State<adminhome> {
   final _auth = FirebaseAuth.instance;
   final pageList = [];
   static String serviceName;
+  int selectedPage;
+  var pageList2;
 
   @override
   void initState() {
     super.initState();
     serviceName = widget.service.toString();
+    selectedPage = 2;
+    pageList2 = [
+      QRViewExample(),
+      infostream(serviceN: serviceName),
+      home2(serviceN: serviceName),
+      adminservices(),
+      Info(),
+    ];
   }
 
-  int selectedPage = 2;
-  var pageList2 = [
-    QRViewExample(),
-    infostream(),
-    home2(),
-    adminservices(),
-    Info(),
-  ];
+  
 
   @override
   Widget build(BuildContext context) {
