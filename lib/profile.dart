@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:QRhelp/RedButton.dart';
 
 // ignore: camel_case_types
 class profile extends StatefulWidget {
@@ -112,21 +113,14 @@ class _profileState extends State<profile> {
             ),
             textAlign: TextAlign.left,
           ),
-          FlatButton(
-            color: const Color(0xffe53935),
-            child: Text(
-              'Back',
-              style: TextStyle(
-                fontFamily: 'NeueKabel',
-                fontSize: 24,
-                color: const Color(0xffffffff),
-              ),
-              textAlign: TextAlign.center,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
+          RedButton(
+              text: 'Back',
+              c: Colors.redAccent,
+              height: 20.0,
+              width: 150.0,
+              onPressed: () {
+                Navigator.pushNamed(context, 'adminhome');
+              }),
         ],
       ),
     );
