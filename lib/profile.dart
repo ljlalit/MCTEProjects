@@ -24,7 +24,6 @@ class _profileState extends State<profile> {
   String unit = 'loading';
   @override
   void initState() {
-    
     super.initState();
     name = widget.userData.name;
     number = widget.userData.number;
@@ -83,21 +82,6 @@ class _profileState extends State<profile> {
                   ),
                 ),
               ),
-              Column(
-                children: [
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, 'info');
-                    },
-                    child: Icon(
-                      FontAwesomeIcons.infoCircle,
-                    ),
-                  ),
-                  Text(
-                    'Info',
-                  ),
-                ],
-              )
             ],
           ),
           Text(
