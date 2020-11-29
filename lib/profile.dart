@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:QRhelp/RedButton.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // ignore: camel_case_types
 class profile extends StatefulWidget {
   final Userdata userData;
 
-  profile({ Key key, this.userData }): super(key: key);
+  profile({Key key, this.userData}) : super(key: key);
   @override
   _profileState createState() => _profileState();
 }
@@ -82,6 +83,21 @@ class _profileState extends State<profile> {
                   ),
                 ),
               ),
+              Column(
+                children: [
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'info');
+                    },
+                    child: Icon(
+                      FontAwesomeIcons.infoCircle,
+                    ),
+                  ),
+                  Text(
+                    'Info',
+                  ),
+                ],
+              )
             ],
           ),
           Text(

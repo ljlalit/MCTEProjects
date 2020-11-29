@@ -1,10 +1,11 @@
 import 'dart:collection';
-
 import 'package:QRhelp/RedButton.dart';
+import 'package:QRhelp/adminhome.dart';
+import 'package:QRhelp/userservices.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'constants.dart';
 
 // ignore: camel_case_types
 class adminservices extends StatefulWidget {
@@ -31,6 +32,12 @@ class _adminservicesState extends State<adminservices> {
   var servicesdocref;
   int servicesarrlen = 0;
   var servicesarr = [];
+  var servicesarr2 = [];
+  var targetuserdocref;
+  var targetuserdata;
+  var targetusername;
+  var targetuseremail;
+  List<dynamic> targetuserservices;
   LinkedHashMap asd;
   void getCurrentUser() async {
     try {
@@ -42,11 +49,9 @@ class _adminservicesState extends State<adminservices> {
         docref.get().then((value) {
           if (value.exists) {
             data = value.data();
-            setState(() {
-              this.arr = data['Services'];
-              this.arrlen = this.arr.length;
-              getServiceUsers();
-            });
+            this.arr = data['Services'];
+            this.arrlen = this.arr.length;
+            getServiceUsers();
           }
         }).catchError((e) {
           print(e);
@@ -63,14 +68,19 @@ class _adminservicesState extends State<adminservices> {
     servicesdocref.get().then((value) {
       if (value.exists) {
         servicesdata = value.data();
-        setState(() {
-          this.asd = servicesdata;
-          asd.forEach((key, value) {
-            this.servicesarr.add(value["Name"]);
+        asd = servicesdata;
+        var s1 = [];
+        var s2 = [];
+        asd.forEach((key, value) {
+          s2.add(key);
+          s1.add(value["Name"]);
+          setState(() {
+            this.servicesarr = s1;
+            this.servicesarr2 = s2;
+            this.servicesarrlen = servicesarr.length;
           });
-          this.servicesarrlen = servicesarr.length;
         });
-      } else {}
+      }
     }).catchError((e) {
       print(e);
     });
@@ -79,56 +89,69 @@ class _adminservicesState extends State<adminservices> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffffffff),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          // RedButton(
-          //   text: 'Refresh',
-          //   c: Colors.blueAccent,
-          //   onPressed: () {},
-          //   width: 200.0,
-          //   height: 20.0,
-          // ),
-          Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Text(
-                  'Users registered',
-                  style: TextStyle(
-                    fontFamily: 'Segoe UI',
-                    fontSize: 40,
-                    color: const Color(0xff090909),
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-              ]),
-          for (int i = 0; i < servicesarrlen; i++)
-            if (servicesarrlen != 0)
-              Row(
-                children: [
-                  Text(
-                    '${servicesarr[i]}',
-                    style: TextStyle(
-                      fontFamily: 'Segoe UI',
-                      fontSize: 34,
-                      color: const Color(0xff090909),
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                  RedButton(
-                      text: 'Unregister',
-                      c: Colors.redAccent,
-                      height: 20.0,
-                      width: 150.0,
-                      onPressed: () {}),
-                ],
-              ),
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: new Text('Users registered'),
+          backgroundColor: Colors.red,
+        ),
+        body: new ListView.builder(
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Container(
+                  height: 70,
+                  color: Colors.white,
+                  child: Center(
+                    child: Row(children: <Widget>[
+                      Text(
+                        '${servicesarr[index]}',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      RedButton(
+                          text: 'Unregister',
+                          c: Colors.redAccent,
+                          height: 20.0,
+                          width: 150.0,
+                          onPressed: () {
+                            _firestore
+                                .collection('servicelist')
+                                .doc(arr[0])
+                                .update(
+                                    {servicesarr2[index]: FieldValue.delete()});
 
-          //Jo bhi changes krne ho krdiyo
-          //services daaliyo font size 34 tho
-        ],
-      ),
-    );
+                            targetuserdocref = _firestore
+                                .collection("users")
+                                .doc(servicesarr2[index]);
+                            targetuserdocref.get().then((value) {
+                              if (value.exists) {
+                                targetuserdata = value.data();
+
+                                this.targetuserservices =
+                                    targetuserdata["Services"];
+                                targetuserservices.remove(arr[0].toString());
+                                try {
+                                  _firestore
+                                      .collection('users')
+                                      .doc(servicesarr2[index])
+                                      .update(
+                                    {
+                                      'Services': targetuserservices,
+                                    },
+                                  );
+                                } catch (e) {
+                                  print(e);
+                                }
+                              }
+                            }).catchError((e) {
+                              print(e);
+                            });
+                            getServiceUsers();
+                          }),
+                    ]),
+                  )),
+            );
+          },
+          itemCount: servicesarrlen,
+        ));
   }
 }

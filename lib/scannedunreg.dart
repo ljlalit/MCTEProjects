@@ -45,7 +45,7 @@ class _scannedunregState extends State<scannedunreg> {
         servicedocref.get().then((value) {
           if (value.exists) {
             servicedata = value.data();
-            print(servicedata["Services"]);
+            //print(servicedata["Services"]);
             getTargetUser();
           }
         }).catchError((e) {
@@ -179,7 +179,7 @@ class _scannedunregState extends State<scannedunreg> {
                         print(e);
                       }
                       targetuserservices.add(servicedata["Services"][0]);
-                      print(targetuserservices);
+                      //print(targetuserservices);
                       try {
                         _firestore.collection('users').doc(id).update(
                           {
@@ -189,7 +189,7 @@ class _scannedunregState extends State<scannedunreg> {
                       } catch (e) {
                         print(e);
                       }
-                      Navigator.pushNamed(context, 'adminhome');
+                      Navigator.pushReplacementNamed(context, 'adminhome');
                     }),
                 SizedBox(
                   width: 10.0,

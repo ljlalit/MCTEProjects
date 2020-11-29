@@ -26,6 +26,7 @@ class _infostreamState extends State<infostream> {
     super.initState();
     serviceName = widget.serviceN;
     // getCurrentUser();
+    getDescription();
   }
 
   void getCurrentUser() async {
@@ -49,6 +50,21 @@ class _infostreamState extends State<infostream> {
     }
   }
 
+  void getDescription() async {
+    docref =
+        _firestore.collection('servicedescription').doc(serviceName.toString());
+    docref.get().then((value) {
+      if (value.exists) {
+        data = value.data();
+        setState(() {
+          desc = data["description"];
+          print(desc);
+        });
+      }
+    });
+  }
+
+  String desc = '';
   String description;
   @override
   Widget build(BuildContext context) {
@@ -68,12 +84,13 @@ class _infostreamState extends State<infostream> {
               child: TextFormField(
                 keyboardType: TextInputType.multiline,
                 maxLines: 24,
+                initialValue: "${desc.toString()}",
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderSide:
                         const BorderSide(width: 7.0, color: Colors.redAccent),
                   ),
-                  labelText: 'Input Information',
+                  labelText: '$serviceName description',
                 ),
                 onChanged: (value) {
                   description = value;
