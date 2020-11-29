@@ -189,7 +189,7 @@ class _scannedunregState extends State<scannedunreg> {
                       } catch (e) {
                         print(e);
                       }
-                      Navigator.pushNamed(context, 'adminhome');
+                      Navigator.pushReplacementNamed(context, 'adminhome');
                     }),
                 SizedBox(
                   width: 10.0,
