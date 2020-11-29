@@ -62,7 +62,7 @@ class _adminservicesState extends State<adminservices> {
     }
   }
 
-  void getServiceUsers() {
+  void getServiceUsers() async{
     servicesdocref =
         _firestore.collection("servicelist").doc(arr[0].toString());
     servicesdocref.get().then((value) {
@@ -74,11 +74,11 @@ class _adminservicesState extends State<adminservices> {
         asd.forEach((key, value) {
           s2.add(key);
           s1.add(value["Name"]);
-          setState(() {
-            this.servicesarr = s1;
-            this.servicesarr2 = s2;
-            this.servicesarrlen = servicesarr.length;
-          });
+        });
+        setState(() {
+          this.servicesarr = List.from(s1);
+          this.servicesarr2 = List.from(s2);
+          this.servicesarrlen = servicesarr.length;
         });
       }
     }).catchError((e) {
@@ -113,12 +113,16 @@ class _adminservicesState extends State<adminservices> {
                           height: 20.0,
                           width: 150.0,
                           onPressed: () {
+                            print("pressed");
+                            try{
                             _firestore
                                 .collection('servicelist')
                                 .doc(arr[0])
                                 .update(
                                     {servicesarr2[index]: FieldValue.delete()});
-
+                            } catch(e){
+                              print(e);
+                            }
                             targetuserdocref = _firestore
                                 .collection("users")
                                 .doc(servicesarr2[index]);
@@ -146,13 +150,13 @@ class _adminservicesState extends State<adminservices> {
                               print(e);
                             });
                             getServiceUsers();
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => adminhome(
-                                          service: arr[0].toString(),
-                                        )),
-                                (route) => false);
+                            // Navigator.pushAndRemoveUntil(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => adminhome(
+                            //               service: arr[0].toString(),
+                            //             )),
+                            //     (route) => false);
                           }),
                     ]),
                   )),

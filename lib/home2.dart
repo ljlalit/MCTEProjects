@@ -23,7 +23,7 @@ class _home2State extends State<home2> {
   void initState() {
     super.initState();
     serviceName = widget.serviceN;
-    // getCurrentUser();
+    getCurrentUser();
   }
 
   void logout(var context) async {
