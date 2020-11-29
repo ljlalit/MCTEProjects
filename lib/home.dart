@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'adminhome.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:QRhelp/profile.dart';
 
 // ignore: camel_case_types
 class home extends StatefulWidget {
@@ -99,7 +100,12 @@ class _homeState extends State<home> {
                               ),
                               ListTile(
                                 onTap: () =>
-                                    {Navigator.pushNamed(context, 'profile')},
+                                    {Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => profile(
+                                                userData: snapshot.data
+                                              )))},
                                 title: Text(
                                   'Your Profile',
                                   style: TextStyle(
@@ -242,14 +248,14 @@ class _homeState extends State<home> {
   }
 }
 
-class Userdata {
-  String email;
-  String name;
-  String number;
-  String rank;
-  String type;
-  String unit;
-  var services = [];
-  Userdata(this.email, this.name, this.number, this.rank, this.services,
-      this.type, this.unit);
-}
+// class Userdata {
+//   String email;
+//   String name;
+//   String number;
+//   String rank;
+//   String type;
+//   String unit;
+//   var services = [];
+//   Userdata(this.email, this.name, this.number, this.rank, this.services,
+//       this.type, this.unit);
+// }

@@ -23,8 +23,13 @@ class _profileState extends State<profile> {
   String unit = 'loading';
   @override
   void initState() {
+    
     super.initState();
-    // getCurrentUser();
+    name = widget.userData.name;
+    number = widget.userData.number;
+    rank = widget.userData.rank;
+    unit = widget.userData.unit;
+    getCurrentUser();
   }
 
 //   var getOptions = {
