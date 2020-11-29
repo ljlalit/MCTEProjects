@@ -146,6 +146,13 @@ class _adminservicesState extends State<adminservices> {
                               print(e);
                             });
                             getServiceUsers();
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => adminhome(
+                                          service: arr[0].toString(),
+                                        )),
+                                (route) => false);
                           }),
                     ]),
                   )),
