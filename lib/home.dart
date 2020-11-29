@@ -99,13 +99,13 @@ class _homeState extends State<home> {
                                 title: SizedBox(),
                               ),
                               ListTile(
-                                onTap: () =>
-                                    {Navigator.push(
+                                onTap: () => {
+                                  Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => profile(
-                                                userData: snapshot.data
-                                              )))},
+                                          builder: (context) =>
+                                              profile(userData: snapshot.data)))
+                                },
                                 title: Text(
                                   'Your Profile',
                                   style: TextStyle(
@@ -123,6 +123,20 @@ class _homeState extends State<home> {
                                 }),
                                 title: Text(
                                   'Your Services',
+                                  style: TextStyle(
+                                    fontFamily: 'NeueKabel',
+                                    fontSize: 32,
+                                    color: const Color(0xffffffff),
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              Divider(),
+                              ListTile(
+                                onTap: () =>
+                                    ({Navigator.pushNamed(context, 'info')}),
+                                title: Text(
+                                  'Information',
                                   style: TextStyle(
                                     fontFamily: 'NeueKabel',
                                     fontSize: 32,
