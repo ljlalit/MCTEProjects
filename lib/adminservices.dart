@@ -104,84 +104,90 @@ class _adminservicesState extends State<adminservices> {
                   height: 70,
                   color: Colors.white,
                   child: Center(
-                    child: Row(children: <Widget>[
-                      Text(
-                        '${servicesarr[index]}',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      RedButton(
-                          text: 'Unregister',
-                          c: Colors.redAccent,
-                          height: 20.0,
-                          width: 150.0,
-                          onPressed: () {
-                            print("pressed");
-                            try {
-                              _firestore
-                                  .collection('servicelist')
-                                  .doc(arr[0])
-                                  .update({
-                                servicesarr2[index]: FieldValue.delete()
-                              }).then((value) {
-                                Alert(
-                                  context: context,
-                                  style: alertStyle,
-                                  type: AlertType.info,
-                                  title: "Unregister",
-                                  desc: "Successfully Unregistered!!!",
-                                  buttons: [
-                                    DialogButton(
-                                      child: Text(
-                                        "OK",
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 20),
-                                      ),
-                                      onPressed: () => Navigator.pop(context),
-                                      color: Color.fromRGBO(0, 179, 134, 1.0),
-                                      radius: BorderRadius.circular(0.0),
-                                    ),
-                                  ],
-                                ).show();
-                              });
-                            } catch (e) {
-                              print(e);
-                            }
-                            targetuserdocref = _firestore
-                                .collection("users")
-                                .doc(servicesarr2[index]);
-                            targetuserdocref.get().then((value) {
-                              if (value.exists) {
-                                targetuserdata = value.data();
-
-                                this.targetuserservices =
-                                    targetuserdata["Services"];
-                                targetuserservices.remove(arr[0].toString());
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            '${servicesarr[index]}',
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          RedButton(
+                              text: 'Unregister',
+                              c: Colors.redAccent,
+                              height: 20.0,
+                              width: 150.0,
+                              onPressed: () {
+                                print("pressed");
                                 try {
                                   _firestore
-                                      .collection('users')
-                                      .doc(servicesarr2[index])
-                                      .update(
-                                    {
-                                      'Services': targetuserservices,
-                                    },
-                                  );
+                                      .collection('servicelist')
+                                      .doc(arr[0])
+                                      .update({
+                                    servicesarr2[index]: FieldValue.delete()
+                                  }).then((value) {
+                                    Alert(
+                                      context: context,
+                                      style: alertStyle,
+                                      type: AlertType.info,
+                                      title: "Unregister",
+                                      desc: "Successfully Unregistered!!!",
+                                      buttons: [
+                                        DialogButton(
+                                          child: Text(
+                                            "OK",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                          color:
+                                              Color.fromRGBO(0, 179, 134, 1.0),
+                                          radius: BorderRadius.circular(0.0),
+                                        ),
+                                      ],
+                                    ).show();
+                                  });
                                 } catch (e) {
                                   print(e);
                                 }
-                              }
-                            }).catchError((e) {
-                              print(e);
-                            });
-                            getServiceUsers();
-                            // Navigator.pushAndRemoveUntil(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => adminhome(
-                            //               service: arr[0].toString(),
-                            //             )),
-                            //     (route) => false);
-                          }),
-                    ]),
+                                targetuserdocref = _firestore
+                                    .collection("users")
+                                    .doc(servicesarr2[index]);
+                                targetuserdocref.get().then((value) {
+                                  if (value.exists) {
+                                    targetuserdata = value.data();
+
+                                    this.targetuserservices =
+                                        targetuserdata["Services"];
+                                    targetuserservices
+                                        .remove(arr[0].toString());
+                                    try {
+                                      _firestore
+                                          .collection('users')
+                                          .doc(servicesarr2[index])
+                                          .update(
+                                        {
+                                          'Services': targetuserservices,
+                                        },
+                                      );
+                                    } catch (e) {
+                                      print(e);
+                                    }
+                                  }
+                                }).catchError((e) {
+                                  print(e);
+                                });
+                                getServiceUsers();
+                                // Navigator.pushAndRemoveUntil(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) => adminhome(
+                                //               service: arr[0].toString(),
+                                //             )),
+                                //     (route) => false);
+                              }),
+                        ]),
                   )),
             );
           },

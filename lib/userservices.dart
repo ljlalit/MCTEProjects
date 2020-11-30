@@ -80,7 +80,7 @@ class _userservicesState extends State<userservices> {
             Column(
               children: <Widget>[
                 Text(
-                  '${arr[i].toString()}',
+                  '${arr[i].toString().toUpperCase()}',
                   style: TextStyle(
                     fontFamily: 'Segoe UI',
                     fontSize: 34,
