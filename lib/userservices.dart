@@ -77,14 +77,19 @@ class _userservicesState extends State<userservices> {
                 ),
               ]),
           for (int i = 0; i < arrlen; i++)
-            Text(
-              '${arr[i].toString()}',
-              style: TextStyle(
-                fontFamily: 'Segoe UI',
-                fontSize: 34,
-                color: const Color(0xff090909),
-              ),
-              textAlign: TextAlign.left,
+            Column(
+              children: <Widget>[
+                Text(
+                  '${arr[i].toString()}',
+                  style: TextStyle(
+                    fontFamily: 'Segoe UI',
+                    fontSize: 34,
+                    color: const Color(0xff090909),
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+                Divider()
+              ],
             ),
           RedButton(
               text: 'Back',
