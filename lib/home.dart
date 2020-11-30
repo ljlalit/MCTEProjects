@@ -119,7 +119,8 @@ class _homeState extends State<home> {
                               Divider(),
                               ListTile(
                                 onTap: () => ({
-                                  Navigator.pushNamed(context, 'services')
+                                  // print('services button clicked.'),
+                                  Navigator.pushNamed(context, 'services'),
                                 }),
                                 title: Text(
                                   'Your Services',
