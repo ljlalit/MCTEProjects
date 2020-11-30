@@ -6,6 +6,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:QRhelp/constants.dart';
 
 // ignore: camel_case_types
 class adminservices extends StatefulWidget {
@@ -62,7 +64,7 @@ class _adminservicesState extends State<adminservices> {
     }
   }
 
-  void getServiceUsers() async{
+  void getServiceUsers() async {
     servicesdocref =
         _firestore.collection("servicelist").doc(arr[0].toString());
     servicesdocref.get().then((value) {
@@ -114,13 +116,35 @@ class _adminservicesState extends State<adminservices> {
                           width: 150.0,
                           onPressed: () {
                             print("pressed");
-                            try{
-                            _firestore
-                                .collection('servicelist')
-                                .doc(arr[0])
-                                .update(
-                                    {servicesarr2[index]: FieldValue.delete()});
-                            } catch(e){
+                            try {
+                              _firestore
+                                  .collection('servicelist')
+                                  .doc(arr[0])
+                                  .update({
+                                servicesarr2[index]: FieldValue.delete()
+                              }).then((value) {
+                                Alert(
+                                  context: context,
+                                  style: alertStyle,
+                                  type: AlertType.info,
+                                  title: "Unregister",
+                                  desc: "Successfully Unregistered!!!",
+                                  buttons: [
+                                    DialogButton(
+                                      child: Text(
+                                        "OK",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 20),
+                                      ),
+                                      onPressed: () => Navigator.pushNamed(
+                                          context, 'adminhome'),
+                                      color: Color.fromRGBO(0, 179, 134, 1.0),
+                                      radius: BorderRadius.circular(0.0),
+                                    ),
+                                  ],
+                                ).show();
+                              });
+                            } catch (e) {
                               print(e);
                             }
                             targetuserdocref = _firestore
