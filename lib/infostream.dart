@@ -110,10 +110,29 @@ class _infostreamState extends State<infostream> {
                         {
                           'description': description,
                         },
-                      );
+                      ).then((value) {
+                        Alert(
+                          context: context,
+                          style: alertStyle,
+                          type: AlertType.info,
+                          title: "Update",
+                          desc: "Successfully Updated!!!",
+                          buttons: [
+                            DialogButton(
+                              child: Text(
+                                "OK",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              onPressed: () => Navigator.pop(context),
+                              color: Color.fromRGBO(0, 179, 134, 1.0),
+                              radius: BorderRadius.circular(0.0),
+                            ),
+                          ],
+                        ).show();
+                      });
                     } catch (e) {
                       print(e);
-                      print('dfddff\nzsfx');
                     }
                   }),
             ),

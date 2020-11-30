@@ -76,6 +76,11 @@ class _userservicesState extends State<userservices> {
                   textAlign: TextAlign.left,
                 ),
               ]),
+          RedButton(
+            text: 'Back',
+            c: Colors.blueAccent,
+            onPressed: ({Navigator.pop(context)}),
+          ),
           for (int i = 0; i < arrlen; i++)
             Text(
               '${arr[i].toString()}',
@@ -86,6 +91,7 @@ class _userservicesState extends State<userservices> {
               ),
               textAlign: TextAlign.left,
             ),
+
           //services daaliyo font size 34 tho
         ],
       ),
