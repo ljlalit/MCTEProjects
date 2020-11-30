@@ -50,159 +50,100 @@ class _infostreamState extends State<infostream> {
     }
   }
 
-  void getDescription() async {
+  Future<String> getDescription() async {
     docref =
         _firestore.collection('servicedescription').doc(serviceName.toString());
     docref.get().then((value) {
-      if (value.exists) {
-        data = value.data();
-        setState(() {
-          desc = data["description"];
-          print(desc);
-        });
-      }
+      data = value.data();
+      String desc = data["description"];
+      return desc;
     });
   }
 
-  String desc = '';
   String description;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-<<<<<<< HEAD
-          resizeToAvoidBottomInset: false,
-          backgroundColor: Colors.white,
-          body: FutureBuilder(
-              future: getDescription(),
-              builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                if (!snapshot.hasData)
-                  return Container();
-                else
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Expanded(
-                          child: Container(
-                        width: 270,
-                        child: TextFormField(
-                          keyboardType: TextInputType.multiline,
-                          maxLines: 24,
-                          initialValue: snapshot.data,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  width: 7.0, color: Colors.redAccent),
-                            ),
-                            labelText: '$serviceName description',
-                          ),
-                          onFieldSubmitted: (value) {
-                            description = value;
-                          },
+        child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            backgroundColor: Colors.white,
+            body: FutureBuilder(
+                future: getDescription(),
+                builder:
+                    (BuildContext context, AsyncSnapshot<String> snapshot) {
+                  if (!snapshot.hasData)
+                    return Container();
+                  else
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 30,
                         ),
-                      )),
-                      Center(
-                        child: RedButton(
-                            text: 'Update',
-                            c: Colors.blueAccent,
-                            onPressed: () {
-                              try {
-                                _firestore
-                                    .collection('servicedescription')
-                                    .doc(serviceName.toString())
-                                    .update(
-                                  {
-                                    'description': description,
-                                  },
-                                );
-                              }.then((value) {
-=======
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            SizedBox(
-              height: 30,
-            ),
-            Expanded(
-                child: Container(
-              width: 270,
-              child: TextFormField(
-                keyboardType: TextInputType.multiline,
-                maxLines: 24,
-                initialValue: "${desc.toString()}",
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(width: 7.0, color: Colors.redAccent),
-                  ),
-                  labelText: '$serviceName description',
-                ),
-                onChanged: (value) {
-                  description = value;
-                },
-              ),
-            )),
-            Center(
-              child: RedButton(
-                  text: 'Update',
-                  c: Colors.blueAccent,
-                  onPressed: () {
-                    try {
-                      _firestore
-                          .collection('servicedescription')
-                          .doc(serviceName.toString())
-                          .update(
-                        {
-                          'description': description,
-                        },
-                      ).then((value) {
->>>>>>> parent of 04a232c... Update infostream.dart
-                        Alert(
-                          context: context,
-                          style: alertStyle,
-                          type: AlertType.info,
-                          title: "Update",
-                          desc: "Successfully Updated!!!",
-                          buttons: [
-                            DialogButton(
-                              child: Text(
-                                "OK",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
+                        Expanded(
+                            child: Container(
+                          width: 270,
+                          child: TextFormField(
+                            keyboardType: TextInputType.multiline,
+                            maxLines: 24,
+                            initialValue: snapshot.data,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    width: 7.0, color: Colors.redAccent),
                               ),
-                              onPressed: () => Navigator.pop(context),
-                              color: Color.fromRGBO(0, 179, 134, 1.0),
-                              radius: BorderRadius.circular(0.0),
+                              labelText: '$serviceName description',
                             ),
-                          ],
-                        ).show();
-                      });
-<<<<<<< HEAD
-                    }  catch (e) {
-                                print(e);
-                              }
-                            }),
-                      ),
-                      SizedBox(),
-                    ],
-                  );
-              })),
-=======
-                    } catch (e) {
-                      print(e);
-                    }
-                  }),
-            ),
-            SizedBox(),
-          ],
-        ),
-      ),
->>>>>>> parent of 04a232c... Update infostream.dart
-    );
+                            onFieldSubmitted: (value) {
+                              description = value;
+                            },
+                          ),
+                        )),
+                        Center(
+                          child: RedButton(
+                              text: 'Update',
+                              c: Colors.blueAccent,
+                              onPressed: () {
+                                try {
+                                  _firestore
+                                      .collection('servicedescription')
+                                      .doc(serviceName.toString())
+                                      .update(
+                                    {
+                                      'description': description,
+                                    },
+                                  ).then((value) {
+                                    Alert(
+                                      context: context,
+                                      style: alertStyle,
+                                      type: AlertType.info,
+                                      title: "Update",
+                                      desc: "Successfully Updated!!!",
+                                      buttons: [
+                                        DialogButton(
+                                          child: Text(
+                                            "OK",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                          color:
+                                              Color.fromRGBO(0, 179, 134, 1.0),
+                                          radius: BorderRadius.circular(0.0),
+                                        ),
+                                      ],
+                                    ).show();
+                                  });
+                                } catch (e) {
+                                  print(e);
+                                }
+                              }),
+                        ),
+                        SizedBox(),
+                      ],
+                    );
+                })));
   }
 }
