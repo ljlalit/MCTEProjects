@@ -9,7 +9,6 @@ import 'buildTextField.dart';
 // ignore: camel_case_types
 class infostream extends StatefulWidget {
   final String serviceN;
-
   infostream({Key key, this.serviceN}) : super(key: key);
   @override
   _infostreamState createState() => _infostreamState();
@@ -25,51 +24,42 @@ class _infostreamState extends State<infostream> {
   void initState() {
     super.initState();
     serviceName = widget.serviceN;
-    // getCurrentUser();
+    //getCurrentUser();
     getDescription();
   }
 
-  void getCurrentUser() async {
-    try {
-      // ignore: await_only_futures
-      final user = await _auth.currentUser;
-      if (user != null) {
-        loggedinUser = user;
-        docref = _firestore.collection("users").doc(loggedinUser.uid);
-        docref.get().then((value) {
-          if (value.exists) {
-            data = value.data();
-            setState(() {
-              serviceName = data["Services"][0];
-            });
-          }
-        });
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  void getDescription() async {
+  // void getCurrentUser() async {
+  //   try {
+  //     // ignore: await_only_futures
+  //     final user = await _auth.currentUser;
+  //     if (user != null) {
+  //       loggedinUser = user;
+  //       docref = _firestore.collection("users").doc(loggedinUser.uid);
+  //       docref.get().then((value) {
+  //         if (value.exists) {
+  //           data = value.data();
+  //           serviceName = data["Services"][0];
+  //         }
+  //       });
+  //     }
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
+  Future<String> getDescription() async {
     docref =
         _firestore.collection('servicedescription').doc(serviceName.toString());
-    docref.get().then((value) {
-      if (value.exists) {
-        data = value.data();
-        setState(() {
-          desc = data["description"];
-          print(desc);
-        });
-      }
-    });
+    data = await docref.get();
+    String desc = data["description"];
+    return desc;
   }
 
-  String desc = '';
-  String description;
+  String description = '';
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+<<<<<<< Updated upstream
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         body: Column(
@@ -140,6 +130,64 @@ class _infostreamState extends State<infostream> {
           ],
         ),
       ),
+=======
+          resizeToAvoidBottomInset: false,
+          backgroundColor: Colors.white,
+          body: FutureBuilder(
+              future: getDescription(),
+              builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                if (!snapshot.hasData)
+                  return Container();
+                else
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Expanded(
+                          child: Container(
+                        width: 270,
+                        child: TextFormField(
+                          keyboardType: TextInputType.multiline,
+                          maxLines: 24,
+                          initialValue: snapshot.data,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  width: 7.0, color: Colors.redAccent),
+                            ),
+                            labelText: '$serviceName description',
+                          ),
+                          onFieldSubmitted: (value) {
+                            description = value;
+                          },
+                        ),
+                      )),
+                      Center(
+                        child: RedButton(
+                            text: 'Update',
+                            c: Colors.blueAccent,
+                            onPressed: () {
+                              try {
+                                _firestore
+                                    .collection('servicedescription')
+                                    .doc(serviceName.toString())
+                                    .update(
+                                  {
+                                    'description': description,
+                                  },
+                                );
+                              } catch (e) {
+                                print(e);
+                              }
+                            }),
+                      ),
+                      SizedBox(),
+                    ],
+                  );
+              })),
+>>>>>>> Stashed changes
     );
   }
 }
