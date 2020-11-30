@@ -136,8 +136,7 @@ class _adminservicesState extends State<adminservices> {
                                         style: TextStyle(
                                             color: Colors.white, fontSize: 20),
                                       ),
-                                      onPressed: () => Navigator.pushNamed(
-                                          context, 'adminhome'),
+                                      onPressed: () => Navigator.pop(context),
                                       color: Color.fromRGBO(0, 179, 134, 1.0),
                                       radius: BorderRadius.circular(0.0),
                                     ),

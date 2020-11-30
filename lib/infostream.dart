@@ -53,14 +53,12 @@ class _infostreamState extends State<infostream> {
   Future<String> getDescription() async {
     docref =
         _firestore.collection('servicedescription').doc(serviceName.toString());
-    docref.get().then((value) {
-      data = value.data();
-      String desc = data["description"];
-      return desc;
-    });
+    data = await docref.get();
+    String desc = data["description"];
+    return desc;
   }
 
-  String description;
+  String description = "";
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -86,7 +84,7 @@ class _infostreamState extends State<infostream> {
                           child: TextFormField(
                             keyboardType: TextInputType.multiline,
                             maxLines: 24,
-                            initialValue: snapshot.data,
+                            initialValue: snapshot.data.toString(),
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderSide: const BorderSide(
@@ -94,7 +92,7 @@ class _infostreamState extends State<infostream> {
                               ),
                               labelText: '$serviceName description',
                             ),
-                            onFieldSubmitted: (value) {
+                            onChanged: (value) {
                               description = value;
                             },
                           ),

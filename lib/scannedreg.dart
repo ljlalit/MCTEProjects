@@ -136,7 +136,7 @@ class _scannedregState extends State<scannedreg> {
                 height: 20.0,
                 width: 150.0,
                 onPressed: () {
-                  Navigator.pushNamed(context, 'adminhome');
+                  Navigator.pushNamed(context, 'home');
                 }),
           ])
         ],
